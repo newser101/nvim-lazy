@@ -1,19 +1,19 @@
-local M={
-    'folke/tokyonight',
+return {
+    'folke/tokyonight.nvim',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
+    --opts = { style = "day"},
+    config = function()
+      local tokyonight = require "tokyonight"
+      tokyonight.setup{
+        style="storm",
+      }
+      tokyonight.load()
+
+      --vim.cmd([[colorscheme tokyonight]])
+    end,
     }
 
-M.name = "tokionight-night" -- aviable night, stormm, moon, day
-function M.config()
-    local status_ok, _ = pcall(vim.cmd.colorscheme, M.name)
-    if not status_ok then
-    vim.notify("colorscheme " .. colorscheme .. " not found!")
-    return
-    end
-end
-
-return M
 
 -- Todo
 -- for lualine:
