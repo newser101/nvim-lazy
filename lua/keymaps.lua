@@ -15,12 +15,30 @@ vim.g.mapleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
+-- my keymaps BEGINN
+-- Normal --
+keymap("n", "<leader>p", ":exec 'w | !python3 %'<CR>", opts)  --run python file 
+keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", opts) -- run bash file 
+keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts) -- run bash file 
+keymap("n","<leader>w",":exec 'w' <CR>",opts) -- save file
+keymap("n","<leader>q",":exec 'q' <CR>",opts) -- quit file
+keymap("n","ee","$",opts) --  jump to the end
+-- my keymaps END
+
 -- Normal --
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
+
+-- Move Lines
+keymap("n", "<A-j>", ":m .+1<CR>==")
+keymap("v", "<A-j>", ":m '>+1<CR>gv=gv")
+keymap("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
+keymap("n", "<A-k>", ":m .-2<CR>==")
+keymap("v", "<A-k>", ":m '<-2<CR>gv=gv")
+keymap("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
