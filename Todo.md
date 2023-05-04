@@ -19,6 +19,8 @@
 - autocmds.lua
 - keymaps.lua
 - bufferline: highlights = { .....
+- statusline add gitsigns
+>set statusline+=%{get(b:,'gitsigns_status','')}
 
 ## check
 - check init.lau if something is missing/needed/can be done
