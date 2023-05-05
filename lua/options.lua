@@ -1,3 +1,6 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 vim.opt.backup = false                          -- creates a backup file
 vim.opt.clipboard = "unnamedplus"               -- allows neovim to access the system clipboard
 vim.opt.cmdheight = 1                           -- more space in the neovim command line for displaying messages
@@ -26,6 +29,7 @@ vim.opt.shiftwidth = 2                          -- the number of spaces inserted
 vim.opt.tabstop = 2                             -- insert 2 spaces for a tab
 vim.opt.cursorline = true                       -- highlight the current line
 vim.opt.number = true                           -- set numbered lines
+vim.opt.relativenumber = true                   -- Relative line numbers
 vim.opt.laststatus = 3                          -- only the last window will always have a status line
 vim.opt.showcmd = false                         -- hide (partial) command in the last line of the screen (for performance)
 vim.opt.ruler = false                           -- hide the line and column number of the cursor position
@@ -41,3 +45,12 @@ vim.opt.whichwrap:append "<,>,[,],h,l"          -- keys allowed to move to the p
 vim.opt.iskeyword:append "-"                    -- treats words with `-` as single words
 vim.opt.formatoptions:remove { "c", "r", "o" }  -- This is a sequence of letters which describes how automatic formatting is to be done
 vim.opt.linebreak = true
+
+
+if vim.fn.has("nvim-0.9.0") == 1 then
+  vim.opt.splitkeep = "screen"
+  vim.opt.shortmess:append({ C = true })
+end
+
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0

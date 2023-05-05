@@ -7,5 +7,7 @@
   "nvim-autopairs": { "branch": "master", "commit": "7747bbae60074acf0b9e3a4c13950be7a2dff444" },
   "nvim-tree.lua": { "branch": "master", "commit": "53295de04d265fba695ec5a21912bdf36647dbad" },
   "nvim-web-devicons": { "branch": "master", "commit": "b34362b20a4942b3245f958e73ebe1b09b020ad1" },
+  "plenary.nvim": { "branch": "master", "commit": "9ac3e9541bbabd9d73663d757e4fe48a675bb054" },
+  "todo-comments.nvim": { "branch": "main", "commit": "8febc60a76feefd8203077ef78b6a262ea1a41f9" },
   "tokyonight.nvim": { "branch": "main", "commit": "f2ed28707a0ad49047d9b733395ea205ea09f517" }
 }
