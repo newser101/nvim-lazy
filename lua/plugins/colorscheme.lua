@@ -9,18 +9,6 @@ return {
         style="storm",
       }
       tokyonight.load()
-
-      --vim.cmd([[colorscheme tokyonight]])
     end,
     }
 
-
--- Todo
--- for lualine:
--- require('lualine').setup {
---     options = {
---       -- ... your lualine config
---       theme = 'tokyonight'
---       -- ... your lualine config
---     }
---   }
