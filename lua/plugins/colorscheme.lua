@@ -7,6 +7,7 @@ return {
       local tokyonight = require "tokyonight"
       tokyonight.setup{
         style="storm",
+        --style="day",
       }
       tokyonight.load()
     end,
