@@ -3,6 +3,8 @@ return{
 config={default=true}  
 },
   {"famiu/bufdelete.nvim"},
-  "nvim-lua/plenary.nvim",
-
+  -- for todo-comments.nvim
+  {
+    "nvim-lua/plenary.nvim",
+    "BurntSushi/ripgrep"},
 }
