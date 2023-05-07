@@ -11,3 +11,4 @@ https://github.com/LazyVim/starter/blob/main/lua/config/lazy.lua
 
 ## Info
 https://alpha2phi.medium.com/modern-neovim-init-lua-ab1220e3ecc1
+https://github.com/CharlesChiuGit/nvimdots.lua

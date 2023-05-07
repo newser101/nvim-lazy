@@ -7,4 +7,5 @@ config={default=true}
   {
     "nvim-lua/plenary.nvim",
     "BurntSushi/ripgrep"},
+    -- TODO: https://github.com/lukas-reineke/indent-blankline.nvim
 }
