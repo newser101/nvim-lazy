@@ -11,3 +11,9 @@ return {
     { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
   },
 }
+-- TODO:
+-- HACK:
+-- WARN:
+-- PERF:
+-- NOTE:
+-- TEST:

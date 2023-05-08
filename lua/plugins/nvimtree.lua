@@ -80,6 +80,7 @@ return {
 
 end
     ---- create on_attach  END      ---------------------------
+-- TODO: close nvim-tree after select a file with <CR>
 
     local tree_cb = require("nvim-tree.config").nvim_tree_callback
     require("nvim-tree").setup {
