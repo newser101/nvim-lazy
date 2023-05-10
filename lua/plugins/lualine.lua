@@ -2,6 +2,7 @@ return{
 "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
 
+
 config = function()
 -- functions for setup
   local branch = {
@@ -24,10 +25,13 @@ local mode = {
 		return "-- " .. str .. " --"
 	end,
 }
+local icons=require("config.icons")
 local diff = {
 	"diff",
 	colored = true,
-	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+--	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+  symbols = icons.difflualine,
+  
   cond = hide_in_width,
   diff_color = {
         -- Same color values as the general color option can be used here.

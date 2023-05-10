@@ -31,42 +31,12 @@ function M.config()
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 require("luasnip.loaders.from_vscode").lazy_load()
+local icons= require("config.icons")
     ---- function for mapping
     local check_backspace = function()
     local col = vim.fn.col "." - 1
     return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
   end
----- kindicons
--- local kind_icons = require("config").icons.kinds
-local kind_icons = {
-    Text = "",
-    Method = "",
-    Function = "",
-    Constructor = "",
-    Field = "",
-    Variable = "",
-    Class = "",
-    Interface = "",
-    Module = "",
-    Property = "",
-    Unit = "",
-    Value = "",
-    Enum = "",
-    Keyword = "",
-    Snippet = "",
-    Color = "",
-    File = "",
-    Reference = "",
-    Folder = "",
-    EnumMember = "",
-    Constant = "",
-    Struct = "",
-    Event = "",
-    Operator = "",
-    TypeParameter = "",
-  }
-
-
 
 ---- setup cmp ------
 cmp.setup({
@@ -124,6 +94,7 @@ cmp.setup({
     formatting = {
       fields = { "kind", "abbr", "menu" },
       format = function(entry, vim_item)
+        kind_icons=icons.kind
         vim_item.kind = kind_icons[vim_item.kind]
         vim_item.menu = ({
           nvim_lsp = "",
@@ -157,14 +128,3 @@ cmp.setup({
 })
 end
 return M
--- NOTE: supertab: https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings
--- TODO: use config/init.lua for icons kind
---  formatting = {
---          format = function(_, item)
---            local icons = require("lazyvim.config").icons.kinds
---            if icons[item.kind] then
---              item.kind = icons[item.kind] .. item.kind
---            end
---            return item
---          end,
---        },
