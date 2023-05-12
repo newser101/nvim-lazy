@@ -36,7 +36,7 @@ local icons= {
     Variable = "",
   },
   git = {
-    LineAdded = "",
+    LineAdded = "",
     LineModified = "",
     LineRemoved = "",
     FileDeleted = "",
@@ -51,6 +51,15 @@ local icons= {
     Octoface = "",
     Branch = "",
   },
+  gitsigns= {
+    add          = { text = '' },
+    change       = { text = '' },
+    delete       = { text = ''},
+    topdelete    = { text = '' },
+    changedelete = { text = '~' },
+    untracked    = { text = '┆' },
+  },
+ 
   ui = {
     ArrowCircleDown = "",
     ArrowCircleLeft = "",
@@ -151,10 +160,10 @@ local icons= {
     Package = "",
     CircuitBoard = "",
   },
-  difflualine ={
-    added = " ",
-    modified = " ",
-    removed = " ",
+  lualine_diff ={
+    added = " ",
+    modified = " ",
+    removed = " ",
   },
 }
 return icons

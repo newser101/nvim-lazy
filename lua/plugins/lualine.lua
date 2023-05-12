@@ -4,17 +4,29 @@ return{
 
 
 config = function()
--- functions for setup
-  local branch = {
+--------------- lualine config --------------------------- 
+local icons=require("config.icons")
+local branch = {
 	"branch",
 	icons_enabled = true,
 	icon = "",
 }
 local diagnostics = {
 	"diagnostics",
+  -- NOTE: check diff diagnostics 
+  -- Table of diagnostic sources, available sources are:
+  --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
 	sources = { "nvim_diagnostic" },
-	sections = { "error", "warn" },
-	symbols = { error = " ", warn = " " },
+	-- sections = { "error", "warn" },
+	sections = { "error", "warn", "info", "hint" },
+	symbols = { error = " ", warn = " ", info ="",hint="" },
+  diagnostics_color = {
+        -- Same values as the general color option can be used here.
+        error = 'DiagnosticError', -- Changes diagnostics' error color.
+        warn  = 'DiagnosticWarn',  -- Changes diagnostics' warn color.
+        info  = 'DiagnosticInfo',  -- Changes diagnostics' info color.
+        hint  = 'DiagnosticHint',  -- Changes diagnostics' hint color.
+      },
 	colored = false,
 	update_in_insert = false,
 	always_visible = true,
@@ -25,12 +37,10 @@ local mode = {
 		return "-- " .. str .. " --"
 	end,
 }
-local icons=require("config.icons")
 local diff = {
 	"diff",
 	colored = true,
---	symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
-  symbols = icons.difflualine,
+  symbols = icons.lualine_diff,
   
   cond = hide_in_width,
   diff_color = {
@@ -59,15 +69,15 @@ local hide_in_width = function()
     return vim.fn.winwidth(0) > 80
   end
 
--- setup lualine
+----------- setup lualine ---------------------
 require('lualine').setup{
 
   options = {
 		icons_enabled = true,
 		theme = "auto",
 		-- theme = "onedark",
-		component_separators = { left = "", right = "<" },
-		section_separators = { left = "", right = "|" },
+		component_separators = { left = "", right = "" },
+		section_separators = { left = "", right = "" },
 		--disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
 		disabled_filetypes = { "alpha", "dashboard", },
 		always_divide_middle = true,
