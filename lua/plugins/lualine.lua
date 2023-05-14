@@ -3,8 +3,8 @@ return{
   event = "VeryLazy",
 
 
+  --------------- lualine config --------------------------- 
 config = function()
---------------- lualine config --------------------------- 
 local icons=require("config.icons")
 local branch = {
 	"branch",
