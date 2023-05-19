@@ -37,6 +37,3 @@ require("lazy").setup("plugins",{
 		},
 	},
 })
-----
---
---TODO: 

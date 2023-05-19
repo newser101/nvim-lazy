@@ -1,6 +1,8 @@
 return {
+  -- NOTE: maybe replace with neo-tree https://github.com/nvim-neo-tree/neo-tree.nvim
   'nvim-tree/nvim-tree.lua',
   event = 'VimEnter',
+  -- TODO: cleanup code
   config = function()
     ---- create on_attach  BEGINN   ---------------------------
   local function on_attach(bufnr)
@@ -87,6 +89,7 @@ end
       enable = true,
       update_cwd = true,
     },
+    -- TODO: use a config file for the icons
     renderer = {
       icons = {
         glyphs = {

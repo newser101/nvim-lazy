@@ -30,7 +30,7 @@ local diagnostics = {
 	colored = false,
 	update_in_insert = false,
 	always_visible = true,
-} 
+}
 local mode = {
 	"mode",
 	fmt = function(str)
@@ -41,7 +41,6 @@ local diff = {
 	"diff",
 	colored = true,
   symbols = icons.lualine_diff,
-  
   cond = hide_in_width,
   diff_color = {
         -- Same color values as the general color option can be used here.
