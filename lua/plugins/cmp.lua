@@ -10,14 +10,13 @@ local M= {
     "hrsh7th/cmp-cmdline",
     "hrsh7th/nvim-cmp",
     "saadparwaiz1/cmp_luasnip",
-    -- TODO: "hrsh7th/cmp-nvim-lua",
+    "hrsh7th/cmp-nvim-lua",
     -- For luasnip users.
     {"L3MON4D3/LuaSnip",
     dependencis={
       "rafamadriz/friendly-snippets",
     },
   },
-    
   },
 -- NOTE: check best event={}
 event={
@@ -25,18 +24,21 @@ event={
   "CmdlineEnter",
 },
 }
+-- TODO: replace with zbirenbaum/copilot.lua
+-- TODO: remap to lazy style opts= function()
+-- https://github.dev/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/coding.lua
 
 function M.config()
 ---- config ------
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 require("luasnip.loaders.from_vscode").lazy_load()
-local icons= require("config.icons")
-    ---- function for mapping
-    local check_backspace = function()
-    local col = vim.fn.col "." - 1
-    return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-  end
+local icons= require("config.icons")  -- load icons from config/icons 
+---- function for mapping
+local check_backspace = function()
+  local col = vim.fn.col "." - 1
+  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+end
 
 ---- setup cmp ------
 cmp.setup({
@@ -48,11 +50,13 @@ cmp.setup({
     },
     ----- mapping 
     mapping = cmp.mapping.preset.insert {
-      ["<C-k>"] = cmp.mapping.select_prev_item(),
-      ["<C-j>"] = cmp.mapping.select_next_item(),
+--       behavior=cmp.ConfirmBehavior.Replace,
+--      ["<C-k>"] = cmp.mapping.select_prev_item(),
+      ["C-k"] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Insert}),
+      ["<C-j>"] = cmp.mapping.select_next_item({behavior=cmp.n.insert}),
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-      ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+      ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping {
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
@@ -90,19 +94,19 @@ cmp.setup({
         "s",
       }),
     },
-    
+
     formatting = {
       fields = { "kind", "abbr", "menu" },
       format = function(entry, vim_item)
-        kind_icons=icons.kind_cmp
+        local kind_icons=icons.kind_cmp -- load icons from config/icons
         vim_item.kind = kind_icons[vim_item.kind]
         vim_item.menu = ({
-          nvim_lsp = "",
-          nvim_lua = "",
-          luasnip = "",
-          buffer = "",
-          path = "",
-          emoji = "",
+          nvim_lsp = "LSP",
+          nvim_lua = "NVIM_LUA",
+          luasnip = "Snippet",
+          buffer = "Buffer",
+          path = "Path",
+--          emoji = "",
         })[entry.source.name]
         return vim_item
       end,
@@ -123,7 +127,8 @@ cmp.setup({
       documention=cmp.config.window.bordered(),
           },
     experimental={
-      ghost_text=true,
+      ghost_text=false,
+      native_menu=false,
     },
 })
 end

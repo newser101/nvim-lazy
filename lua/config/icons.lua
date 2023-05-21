@@ -86,7 +86,7 @@ local icons= {
     changedelete = { text = '~' },
     untracked    = { text = '┆' },
   },
- 
+
   ui = {
     ArrowCircleDown = "",
     ArrowCircleLeft = "",
