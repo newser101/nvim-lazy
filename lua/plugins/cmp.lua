@@ -31,6 +31,7 @@ event={
 function M.config()
 ---- config ------
 local cmp = require("cmp")
+
 local luasnip = require("luasnip")
 require("luasnip.loaders.from_vscode").lazy_load()
 local icons= require("config.icons")  -- load icons from config/icons 
@@ -38,6 +39,7 @@ local icons= require("config.icons")  -- load icons from config/icons
 local check_backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+
 end
 
 ---- setup cmp ------
@@ -53,7 +55,7 @@ cmp.setup({
 --       behavior=cmp.ConfirmBehavior.Replace,
 --      ["<C-k>"] = cmp.mapping.select_prev_item(),
       ["C-k"] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Insert}),
-      ["<C-j>"] = cmp.mapping.select_next_item({behavior=cmp.n.insert}),
+--      ["<C-j>"] = cmp.mapping.select_next_item({behavior=cmp.n.insert}),
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
       ["<C-Space>"] = cmp.mapping.complete(),
