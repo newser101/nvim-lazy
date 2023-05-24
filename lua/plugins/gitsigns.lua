@@ -2,7 +2,7 @@ return {
   'lewis6991/gitsigns.nvim',
   version="*",
   -- TODO: event = ?
-  
+
   config = function()
     local git_signs=require("config.icons").gitsigns
     require('gitsigns').setup({
