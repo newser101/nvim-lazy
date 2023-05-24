@@ -2,10 +2,7 @@ local M= {
 "hrsh7th/nvim-cmp",
   version = "*", -- last release is way too old
  -- event = "InsertEnter",
- event={
-   "InsertEnter",
-   "CmdlineEnter",
- },
+  dependencies = {
     "neovim/nvim-lspconfig",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
@@ -15,9 +12,17 @@ local M= {
     "saadparwaiz1/cmp_luasnip",
     "hrsh7th/cmp-nvim-lua",
     -- For luasnip users.
-    "L3MON4D3/LuaSnip",
-    "rafamadriz/friendly-snippets",
-    -- NOTE: check best event={}
+    {"L3MON4D3/LuaSnip",
+    dependencies={
+      "rafamadriz/friendly-snippets",
+    },
+  },
+  },
+-- NOTE: check best event={}
+event={
+  "InsertEnter",
+  "CmdlineEnter",
+},
 }
 -- TODO: replace with zbirenbaum/copilot.lua
 -- TODO: remap to lazy style opts= function()
@@ -26,7 +31,6 @@ local M= {
 function M.config()
 ---- config ------
 local cmp = require("cmp")
-
 local luasnip = require("luasnip")
 require("luasnip.loaders.from_vscode").lazy_load()
 local icons= require("config.icons")  -- load icons from config/icons 
