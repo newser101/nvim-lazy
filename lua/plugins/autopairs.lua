@@ -1,6 +1,6 @@
 return{
 'windwp/nvim-autopairs',
-dependfencies={
+dependencies={
   'hrsh7th/nvim-cmp',
 },
 
