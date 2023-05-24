@@ -1,4 +1,4 @@
-local M= {
+return {
 "hrsh7th/nvim-cmp",
   version = "*", -- last release is way too old
  -- event = "InsertEnter",
@@ -23,12 +23,12 @@ event={
   "InsertEnter",
   "CmdlineEnter",
 },
-}
+
 -- TODO: replace with zbirenbaum/copilot.lua
 -- TODO: remap to lazy style opts= function()
 -- https://github.dev/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/coding.lua
 
-function M.config()
+config = function()
 ---- config ------
 local cmp = require("cmp")
 local luasnip = require("luasnip")
@@ -132,5 +132,5 @@ cmp.setup({
       native_menu=false,
     },
 })
-end
-return M
+end,
+}
