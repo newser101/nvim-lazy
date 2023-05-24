@@ -13,7 +13,7 @@ local M= {
     "hrsh7th/cmp-nvim-lua",
     -- For luasnip users.
     {"L3MON4D3/LuaSnip",
-    dependencis={
+    dependencies={
       "rafamadriz/friendly-snippets",
     },
   },
@@ -31,7 +31,6 @@ event={
 function M.config()
 ---- config ------
 local cmp = require("cmp")
-
 local luasnip = require("luasnip")
 require("luasnip.loaders.from_vscode").lazy_load()
 local icons= require("config.icons")  -- load icons from config/icons 
