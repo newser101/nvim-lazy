@@ -10,8 +10,7 @@ return {
         "williamboman/mason-lspconfig.nvim",  -- NOTE: check documentation
         lazy=true,
       },
-      },  
-    
+      },
 --  keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },  -- NOTE: check if needed
 
   -----------config------------

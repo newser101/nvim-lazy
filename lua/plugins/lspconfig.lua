@@ -4,7 +4,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   lazy=true,  -- NOTE: check 
   dependencies = {
-     { "folke/neoconf.nvim", cmd = "Neoconf", config = true }, -- NOTE: check documentation
+     --{ "folke/neoconf.nvim", cmd = "Neoconf", config = true }, -- NOTE: check documentation
      { "folke/neodev.nvim", config=true }, -- NOTE: check documentation
 --     "williamboman/mason.nvim",
 --     "williamboman/mason-lspconfig.nvim",
@@ -16,10 +16,11 @@ return {
   config = function()
 
   local lspconfig=require('lspconfig')
-  -------- setup pyright ---------------
+  -------- setup pyright BEGINN ---------------
   lspconfig.pyright.setup{} -- TODO: buil serverlist in config
   --
   -- setup lua_ls -------
+  -- TODO: move to settings file in /lsp
   lspconfig.lua_ls.setup{
   settings = {
           Lua = {
@@ -35,6 +36,6 @@ return {
               },
             },
   }
------------- setup lua_ls -----------------
+------------ setup lua_ls END -----------------
   end,
 }
