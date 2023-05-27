@@ -4,7 +4,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   lazy=true,  -- NOTE: check 
   dependencies = {
-     --{ "folke/neoconf.nvim", cmd = "Neoconf", config = true }, -- NOTE: check documentation
+     --{ "folke/neoconf.nvim", cmd = "Neoconf", config = true }, -- NOTE: produce an error in healthcheck 
      { "folke/neodev.nvim", config=true }, -- NOTE: check documentation
 --     "williamboman/mason.nvim",
 --     "williamboman/mason-lspconfig.nvim",

@@ -3,7 +3,7 @@ return {
 -- TODO:  cmd = { "TodoTelescope"},  -- "TodoTrouble", "TodoTelescope" 
   cmd = { "TodoTelescope"},  -- "TodoTrouble", "TodoTelescope" 
   event = { "BufReadPost", "BufNewFile" },
-  config = true,
+  -- config = true,
   -- stylua: ignore
   keys = {
     { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
@@ -11,6 +11,21 @@ return {
     { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
     { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
   },
+  config =function ()
+    local todo = require('todo-comments')
+    todo.setup{
+      keywords={
+        todo = { icon = " ", color = "info" }, -- added todo to keywords
+      },
+      highlight={
+        pattern = [[.*<(KEYWORDS)\s*]], -- removed : neede to detect [[.*<(KEYWORDS)\s*:]]
+      },
+      search={
+        pattern = [[\b(KEYWORDS)\b]], -- removed : neede to detect [[.*<(KEYWORDS)\s*:]]
+      }
+
+    }
+  end
 }
 -- TODO:
 -- HACK:
@@ -18,3 +33,5 @@ return {
 -- PERF:
 -- NOTE:
 -- TEST:
+-- TODO 
+-- todo 

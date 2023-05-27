@@ -23,10 +23,7 @@ event={
   "InsertEnter",
   "CmdlineEnter",
 },
-
 -- TODO: replace with zbirenbaum/copilot.lua
--- TODO: remap to lazy style opts= function()
--- https://github.dev/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/coding.lua
 
 config = function()
 ---- config ------
@@ -40,7 +37,7 @@ local check_backspace = function()
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
 
 end
-
+-- 
 ---- setup cmp ------
 cmp.setup({
   --- recommended setup from https://github.com/hrsh7th/nvim-cmp
