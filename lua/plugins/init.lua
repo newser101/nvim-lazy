@@ -5,5 +5,7 @@ opts={default=true}
   "famiu/bufdelete.nvim",
   "nvim-lua/plenary.nvim",
   "BurntSushi/ripgrep",
-    -- TODO: https://github.com/lukas-reineke/indent-blankline.nvim
+  --- insert indent_blankline ---
+  --- insert indent_blankline ---
+
 }
