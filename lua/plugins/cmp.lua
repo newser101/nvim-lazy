@@ -1,6 +1,6 @@
 return {
 "hrsh7th/nvim-cmp",
-  version = "*", -- last release is way too old
+--  version = "*", -- last release is way too old
  -- event = "InsertEnter",
   dependencies = {
     "neovim/nvim-lspconfig",
@@ -9,8 +9,8 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
     "hrsh7th/nvim-cmp",
-    "saadparwaiz1/cmp_luasnip",
     "hrsh7th/cmp-nvim-lua",
+    "saadparwaiz1/cmp_luasnip",
     -- For luasnip users.
     {"L3MON4D3/LuaSnip",
     dependencies={
@@ -29,15 +29,17 @@ config = function()
 ---- config ------
 local cmp = require("cmp")
 local luasnip = require("luasnip")
+require("luasnip.loaders.from_snipmate").lazy_load{path = vim.fn.stdpath "config" .. "/snippets/snipmate"} -- new
 require("luasnip.loaders.from_vscode").lazy_load()
 local icons= require("config.icons")  -- load icons from config/icons 
+
 ---- function for mapping
 local check_backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-
 end
--- 
+-------------------------
+
 ---- setup cmp ------
 cmp.setup({
   --- recommended setup from https://github.com/hrsh7th/nvim-cmp
@@ -54,7 +56,7 @@ cmp.setup({
 --      ["<C-j>"] = cmp.mapping.select_next_item({behavior=cmp.n.insert}),
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-      ["<C-Space>"] = cmp.mapping.complete(),
+      ["<C-Space>"] = cmp.mapping.complete(cmp.mapping.complete(),{ "i", "c" }),
       ["<C-e>"] = cmp.mapping {
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),

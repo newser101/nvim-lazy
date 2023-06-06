@@ -14,6 +14,12 @@ return {
   config =function ()
     local todo = require('todo-comments')
     todo.setup{
+      ------
+      gui_style = {
+      fg = "NONE", -- The gui style to use for the fg highlight group.
+      bg = "BOLD", -- The gui style to use for the bg highlight group.
+    },
+    --------------
       keywords={
         todo = { icon = " ", color = "info" }, -- added todo to keywords
       },
