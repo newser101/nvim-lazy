@@ -22,6 +22,7 @@ return {
     --------------
       keywords={
         todo = { icon = " ", color = "info" }, -- added todo to keywords
+        note = { icon = " ", color = "hint", alt = { "INFO" } },
       },
       highlight={
         pattern = [[.*<(KEYWORDS)\s*]], -- removed : neede to detect [[.*<(KEYWORDS)\s*:]]
@@ -41,3 +42,7 @@ return {
 -- TEST:
 -- TODO 
 -- todo 
+-- note
+-- FIX
+-- NOTE
+-- todo

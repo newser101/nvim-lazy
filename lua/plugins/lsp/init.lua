@@ -1,8 +1,9 @@
 -- https://github.com/Alexis12119/nvim-config/tree/main/lua/plugins/lsp
+-- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/lsp/init.lua
 return {
   -- lspconfig
   "neovim/nvim-lspconfig",
-  event = { "BufReadPre", "BufNewFile" },
+  event = { "BufReadPre", "BufNewFile" }, -- note check
   cmd = { "LspInfo", "LspInstall", "LspUninstall" },
   lazy=true,  -- NOTE: check 
   config = function ()
