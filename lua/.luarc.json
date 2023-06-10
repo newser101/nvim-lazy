@@ -1,0 +1,11 @@
+{
+    "workspace.library": [
+        "/home/cawl/.config/nvim",
+        "/home/cawl/.local/share/nvim/site",
+        "/home/cawl/.local/share/nvim/lazy/lazy.nvim",
+        "/usr/local/share/nvim/runtime",
+        "/usr/local/lib/nvim",
+        "/home/cawl/.local/state/nvim/lazy/readme",
+        "${3rd}/luassert/library"
+    ]
+}
