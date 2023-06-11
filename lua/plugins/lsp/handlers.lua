@@ -1,11 +1,12 @@
 local M = {}
-local keymap = vim.keymap.set
 
+local keymap = vim.keymap.set
 local cmp_nvim_lsp = require "cmp_nvim_lsp"
 
-M.capabilities = cmp_nvim_lsp.default_capabilities()
+M.capabilities = cmp_nvim_lsp.default_capabilities() -- NOTE: check
 
 M.setup = function()
+  print('M.setup')
   local signs = { Error = "", Warn = "", Hint = "", Info = "" }
   for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
@@ -31,7 +32,6 @@ M.setup = function()
       prefix = "",
     },
   }
-
   vim.diagnostic.config(config)
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -41,73 +41,44 @@ M.setup = function()
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "rounded",
   })
-end
 
+  local lspconfig = require('lspconfig') -- TODO: remove after config mason
+  lspconfig.pyright.setup {}
+  lspconfig.lua_ls.setup {
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = 'LuaJIT',
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = { 'vim' },
+        },
+        workspace = {
+          checkThirdParty = false,     -- dissable conf env as 'luv'
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file("", true),
+        },
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false,
+        },
+      },
+    },
+  }   -- TODO: remove after config mason   END
+end
+----- keymaps -------
 local function lsp_keymaps(bufnr)
-  local buf_opts = { buffer = bufnr, silent = true }
-  -- keymap("n", "gD", vim.lsp.buf.declaration, buf_opts)
-  keymap("n", "gD", ":Lspsaga lsp_finder<CR>", buf_opts)
-  keymap("n", "gd", ":Lspsaga goto_definition<CR>", buf_opts)
-  -- keymap("n", "gd", vim.lsp.buf.definition, buf_opts)
-  keymap("n", "gl", ":Lspsaga show_line_diagnostics<CR>", buf_opts)
-  keymap("n", "gc", ":Lspsaga show_cursor_diagnostics<CR>", buf_opts)
-  keymap("n", "gp", ":Lspsaga peek_definition<CR>", buf_opts)
-  -- keymap("n", "K", vim.lsp.buf.hover, buf_opts)
-  keymap("n", "K", ":Lspsaga hover_doc<CR>", buf_opts)
-  keymap("n", "gi", vim.lsp.buf.implementation, buf_opts)
+  local opts = { buffer = bufnr, silent = true }
+  -- NOTE maybie glepnir/lspsaga.nvim
+  keymap('n', 'gD', vim.lsp.buf.declaration, opts)
 end
 
--- Highlight symbol under cursor
-local function lsp_highlight(client, bufnr)
-  if client.supports_method "textDocument/documentHighlight" then
-    vim.api.nvim_create_augroup("lsp_document_highlight", {
-      clear = false,
-    })
-    vim.api.nvim_clear_autocmds {
-      buffer = bufnr,
-      group = "lsp_document_highlight",
-    }
-    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-      group = "lsp_document_highlight",
-      buffer = bufnr,
-      callback = vim.lsp.buf.document_highlight,
-    })
-    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-      group = "lsp_document_highlight",
-      buffer = bufnr,
-      callback = vim.lsp.buf.clear_references,
-    })
-  end
-end
-
-local function disable_format_on_save()
-  vim.api.nvim_del_augroup_by_name "Format on save"
-  vim.notify("Format on save is now disabled", vim.log.levels.INFO, { title = "Format" })
-end
-
-local function enable_format_on_save()
-  vim.api.nvim_create_augroup("Format on save", { clear = false })
-  vim.api.nvim_create_autocmd("BufWritePost", {
-    callback = function()
-      vim.cmd "Format"
-    end,
-    group = "Format on save",
-  })
-  vim.notify("Format on save is now enabled", vim.log.levels.INFO, { title = "Format" })
-end
-
-M.on_attach = function(client, bufnr)
-  lsp_keymaps(bufnr)
-  lsp_highlight(client, bufnr)
-
-  vim.api.nvim_create_user_command("FormatOnSaveToggle", function()
-    if vim.fn.exists "#Format on save#BufWritePost" == 0 then
-      enable_format_on_save()
-    else
-      disable_format_on_save()
-    end
-  end, { nargs = "*" })
-  client.server_capabilities.semanticTokensProvider = nil
+-- on_attach function
+M.on_attach = function(bufnr)
+  lsp_keymaps(bufnr)  -- TODO keymap
+  -- TODO highlight
 end
 
 return M
