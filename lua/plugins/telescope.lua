@@ -1,6 +1,7 @@
+-- https://github.com/loctvl842/nvim/blob/master/lua/tvl/core/resources/editor.lua
 return {
---    'nvim-telescope/telescope.nvim',
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    'nvim-telescope/telescope.nvim', version=false,
+--    'nvim-telescope/telescope.nvim', tag = '0.1.1',
 -- or                              , branch = '0.1.1',
 --    lazy=true,
     dependencies={

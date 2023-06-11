@@ -1,12 +1,10 @@
 local M = {}
 
-local keymap = vim.keymap.set
 local cmp_nvim_lsp = require "cmp_nvim_lsp"
 
 M.capabilities = cmp_nvim_lsp.default_capabilities() -- NOTE: check
 
 M.setup = function()
-  print('M.setup')
   local signs = { Error = "", Warn = "", Hint = "", Info = "" }
   for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
@@ -30,6 +28,7 @@ M.setup = function()
       source = "always",
       header = "",
       prefix = "",
+      suffix = "",
     },
   }
   vim.diagnostic.config(config)
@@ -56,7 +55,7 @@ M.setup = function()
           globals = { 'vim' },
         },
         workspace = {
-          checkThirdParty = false,     -- dissable conf env as 'luv'
+          checkThirdParty = false, -- dissable conf env as 'luv'
           -- Make the server aware of Neovim runtime files
           library = vim.api.nvim_get_runtime_file("", true),
         },
@@ -66,18 +65,40 @@ M.setup = function()
         },
       },
     },
-  }   -- TODO: remove after config mason   END
+  } -- TODO: remove after config mason   END
 end
 ----- keymaps -------
 local function lsp_keymaps(bufnr)
-  local opts = { buffer = bufnr, silent = true }
+  local keymap = vim.keymap.set
+  local opts = { buffer = bufnr, }
+  --Remap space as leader key
+  keymap("", "<Space>", "<Nop>", opts)
+  vim.g.mapleader = " "
   -- NOTE maybie glepnir/lspsaga.nvim
+  --  keymap("n", "gD", ":Lspsaga lsp_finder<CR>", opts)
   keymap('n', 'gD', vim.lsp.buf.declaration, opts)
+  keymap('n', 'gd', vim.lsp.buf.definition, opts)
+  keymap('n', 'K', vim.lsp.buf.hover, opts)
+  keymap('n', 'gi', vim.lsp.buf.implementation, opts)
+  keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+  --  keymap('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+  --  keymap('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+  --  keymap('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+  --  keymap('n', '<space>wl', function()
+  --    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  --  end, opts)
+keymap('n', '<space>D', vim.lsp.buf.type_definition, opts)
+  keymap('n', '<space>rn', vim.lsp.buf.rename, opts)
+  keymap(bufnr,{ 'n', 'v' }, '<space>ca', "<cmd>lua vim.lsp.buf.code_action()<CR>", {noremap=true,silent=true})
+  keymap('n', 'gr', vim.lsp.buf.references, opts)
+  keymap('n', '<space>f', function()
+    vim.lsp.buf.format { async = true }
+  end, opts)
 end
 
 -- on_attach function
 M.on_attach = function(bufnr)
-  lsp_keymaps(bufnr)  -- TODO keymap
+  lsp_keymaps(bufnr) -- TODO keymap
   -- TODO highlight
 end
 
