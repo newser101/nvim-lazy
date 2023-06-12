@@ -26,3 +26,5 @@
 - check init.lau if something is missing/needed/can be done
 - check keymaps
 
+- lualine + navic
+https://alpha2phi.medium.com/neovim-for-beginners-status-line-dd0c97fba978

@@ -1,6 +1,6 @@
 return {
     {"williamboman/mason.nvim", -- NOTE: check documentation
-      -- build=":MasonUpdate"
+       build=":MasonUpdate"
 --      cmd = "Mason",
   opts={
   ensure_installed={"lua_ls",}
