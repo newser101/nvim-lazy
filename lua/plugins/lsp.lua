@@ -6,17 +6,18 @@ return {
   lazy = true, -- NOTE: check
   dependencies = {
     --{ "folke/neoconf.nvim", cmd = "Neoconf", config = true }, -- NOTE: produce an error in healthcheck
-    { "folke/neodev.nvim", 
---    "williamboman/nvim-lsp-installer",
-    --     "williamboman/mason.nvim",
-    --     "williamboman/mason-lspconfig.nvim",
-    "hrsh7th/cmp-nvim-lsp",  -- in cmp.lua
+    { "folke/neodev.nvim",
+      --    "williamboman/nvim-lsp-installer",
+      --     "williamboman/mason.nvim",
+      --     "williamboman/mason-lspconfig.nvim",
+      "hrsh7th/cmp-nvim-lsp", -- in cmp.lua
+    },
   },
-},
   -- TODO: clean up code
-keys = {
+  keys = {
     --  TODO: edit keymaps for my uses
     { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>",           desc = "Code Action" },
+    { "gd",         "<cmd>lua vim.lsp.buf.definition()<CR>",            desc = "Goto Definition" },
     { "<leader>ld", "<cmd>Telescope lsp_document_diagnostics<cr>",      desc = "Document Diagnostics" },
     { "<leader>lw", "<cmd>Telescope lsp_workspace_diagnostics<cr>",     desc = "Workspace Diagnostics" },
     { "<leader>li", "<cmd>LspInfo<cr>",                                 desc = "Info" },
@@ -40,21 +41,21 @@ keys = {
     capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
     local lspconfig = require('lspconfig')
 
---    local on_attach = function (client,bufnr)
---       if client.name == "lua_ls" then
---      client.server_capabilities.documentFormattingProvider = false
---    end
---      lsp_keymaps(bufnr)
---      require("lua.plugins.illuminate").on_attach(client)
---      
---    end
+    --    local on_attach = function (client,bufnr)
+    --       if client.name == "lua_ls" then
+    --      client.server_capabilities.documentFormattingProvider = false
+    --    end
+    --      lsp_keymaps(bufnr)
+    --      require("lua.plugins.illuminate").on_attach(client)
+    --
+    --    end
     -------- setup servers BEGINN ---------------
     lspconfig.pyright.setup {} -- TODO: buil serverlist in config
     --
     lspconfig.lua_ls.setup {
       settings = {
         Lua = {
-          workspace = {   -- NOTE: need for 'luv' bug
+          workspace = { -- NOTE: need for 'luv' bug
             checkThirdParty = false,
           },
           completion = {
@@ -68,47 +69,47 @@ keys = {
     }
     -------- setup servers END ---------------
 
-     local signs = {
-    { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
-  }
+    local signs = {
+      { name = "DiagnosticSignError", text = "" },
+      { name = "DiagnosticSignWarn",  text = "" },
+      { name = "DiagnosticSignHint",  text = "" },
+      { name = "DiagnosticSignInfo",  text = "" },
+    }
 
-  for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-  end
-         
+    for _, sign in ipairs(signs) do
+      vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+    end
 
-  local config = {
-    -- disable virtual text
-    virtual_text = false,
-    -- show signs
-    signs = {
-      active = signs,
-    },
-    update_in_insert = true,
-    underline = true,
-    severity_sort = true,
-    float = {
-      focusable = false,
-      style = "minimal",
+
+    local config = {
+      -- disable virtual text
+      virtual_text = true,
+      -- show signs
+      signs = {
+        active = signs,
+      },
+      update_in_insert = true,
+      underline = true,
+      severity_sort = true,
+      float = {
+        focusable = false,
+        style = "minimal",
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
+        suffix = "",
+      },
+    }
+
+    vim.diagnostic.config(config)
+
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
       border = "rounded",
-      source = "always",
-      header = "",
-      prefix = "",
-      suffix = "",
-    },
-  }
+    })
 
-  vim.diagnostic.config(config)
-
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "rounded",
-  })
-
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "rounded",
-  })
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+      border = "rounded",
+    })
   end,
 }
