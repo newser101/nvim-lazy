@@ -1,3 +1,5 @@
+-- eventually use navic for statusline
+-- https://alpha2phi.medium.com/neovim-for-beginners-status-line-dd0c97fba978
 return{
 "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
