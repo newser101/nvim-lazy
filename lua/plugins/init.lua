@@ -64,4 +64,12 @@ return {
       vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
     end
   },
+  {
+    "simrat39/symbols-outline.nvim",
+    opts={},
+    keys={
+      {"<leader>tt", "<cmd>SymbolsOutline<CR>",desc="Toggle symbols "  },
+    },
+  },
+
 }

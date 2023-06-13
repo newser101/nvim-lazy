@@ -1,5 +1,5 @@
 return {
-  -- NOTE: maybe replace with neo-tree https://github.com/nvim-neo-tree/neo-tree.nvim
+  -- FIX: maybe replace with neo-tree https://github.com/nvim-neo-tree/neo-tree.nvim
   'nvim-tree/nvim-tree.lua',
   event = 'VimEnter',
   -- TODO: cleanup code

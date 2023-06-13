@@ -1,5 +1,4 @@
 return {
-  -- lspconfig
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   cmd = { "LspInfo", "LspInstall", "LspUninstall" },
@@ -28,7 +27,7 @@ return {
     { "<leader>lq", "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>",    desc = "Quickfix" },
     { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>",                desc = "Rename" },
     { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>",          desc = "Document Symbols" },
-    { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols" },
+
   },
 
   -----------config------------

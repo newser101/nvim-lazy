@@ -8,6 +8,8 @@ return {
       'nvim-lua/plenary.nvim'
     },
 config = function ()
+  -- FIX:cleanup code 
+  -- 
   ------ keymaps moved to /lua/config/keymaps.lua 
 --local builtin= require('telescope.builtin')
 --  vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
