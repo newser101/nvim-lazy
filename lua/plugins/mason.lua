@@ -8,7 +8,7 @@ return {
     lazy = true,
   },
   config = function()
-    local installed = require("config.handler").mason_lspconfig_ens_installed
+    local ensure_installed = require("config.lsphandlers").mason_ensure_installed
     local settings = {
       ui = {
         border = "none",
@@ -24,7 +24,7 @@ return {
 
     require("mason").setup(settings)
     require("mason-lspconfig").setup {
-      ensure_installed = installed,
+      ensure_installed = ensure_installed,
       automatic_installation = true,
     }
   end
