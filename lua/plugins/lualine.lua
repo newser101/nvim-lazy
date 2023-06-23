@@ -8,6 +8,7 @@ return {
   --------------- lualine config ---------------------------
   config = function()
     local icons = require("config.icons")
+    -- todo clean up code
     local branch = {
       "branch",
       icons_enabled = true,

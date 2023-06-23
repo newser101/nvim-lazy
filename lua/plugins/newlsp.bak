@@ -1,6 +1,7 @@
 -- https://blog.codeminer42.com/configuring-language-server-protocol-in-neovim/
 return {
   "neovim/nvim-lspconfig",
+  enabled=false,
   lazy = true,
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {

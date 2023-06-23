@@ -1,8 +1,9 @@
 return {
   "neovim/nvim-lspconfig",
+--  enabled=false,
   event = { "BufReadPre", "BufNewFile" },
   cmd = { "LspInfo", "LspInstall", "LspUninstall" },
-  lazy = true, -- NOTE: check
+--     lazy = true, -- NOTE: check
   dependencies = {
     --{ "folke/neoconf.nvim", cmd = "Neoconf", config = true }, -- NOTE: produce an error in healthcheck
     { "folke/neodev.nvim",

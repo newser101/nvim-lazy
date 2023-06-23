@@ -1,4 +1,19 @@
-local icons= {
+local icons = {
+  ---- restart icons BEGINN  -----
+  ---- nvimtree BEGINN ----
+
+  git_nvimtree = {
+    unstaged = "",
+    staged = "S",
+    unmerged = "",
+    renamed = "➜",
+    untracked = "U",
+    deleted = "",
+    ignored = "◌",
+  },
+
+  ---- nvimtree END ----
+  ---- restart icons END  -----
   kind = {
     Array = "",
     Boolean = "",
@@ -35,7 +50,7 @@ local icons= {
     Value = "",
     Variable = "",
   },
-  kind_cmp={
+  kind_cmp = {
     Text = "",
     Method = "",
     Function = "",
@@ -78,10 +93,10 @@ local icons= {
     Octoface = "",
     Branch = "",
   },
-  gitsigns= {
+  gitsigns = {
     add          = { text = '' },
     change       = { text = '' },
-    delete       = { text = ''},
+    delete       = { text = '' },
     topdelete    = { text = '' },
     changedelete = { text = '~' },
     untracked    = { text = '┆' },
@@ -187,7 +202,7 @@ local icons= {
     Package = "",
     CircuitBoard = "",
   },
-  lualine_diff ={
+  lualine_diff = {
     added = " ",
     modified = " ",
     removed = " ",
