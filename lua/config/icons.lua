@@ -3,7 +3,7 @@ local icons = {
   ---- nvimtree BEGINN ----
 
   git_nvimtree = {
-    unstaged = "",
+    unstaged = "",
     staged = "S",
     unmerged = "",
     renamed = "➜",
@@ -11,8 +11,24 @@ local icons = {
     deleted = "",
     ignored = "◌",
   },
-
+  folder_nvimtree = {
+    arrow_open = "",
+    arrow_closed = "",
+    default = "",
+    open = "",
+    empty = "",
+    empty_open = "",
+    symlink = "",
+    symlink_open = "",
+  },
+  icons_nvimtree = {
+    hint = "",
+    info = "",
+    warning = "",
+    error = "",
+  },
   ---- nvimtree END ----
+  --
   ---- restart icons END  -----
   kind = {
     Array = "",
