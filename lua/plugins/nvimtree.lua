@@ -1,17 +1,26 @@
 return {
   -- FIX: maybe replace with neo-tree https://github.com/nvim-neo-tree/neo-tree.nvim
   'nvim-tree/nvim-tree.lua',
-  enabled = false,
+  enabled = true,
   event = 'VimEnter',
   -- TODO: cleanup code
   version = "*",
   cmd = "NeoTree",
+  dependencies = {
+    "nvim-tree/nvim-web-devicons",
+    lazy = true,
+    opts = { default = true }
+  },
   keys = {
-    { "<leader>e", "<cmd>NvimTreeToggle<CR>", desc = "NvimTreeToggle" }
+    { "<leader>e", ":NvimTreeToggle<CR>", desc = "NvimTreeToggle" },
   },
 
   config = function()
-    local git_nvimtree = require("config.icons").git_nvimtree
+    -- disable netrw at the very start of your init.lua
+    vim.g.loaded_netrw = true
+    vim.g.loaded_netrwPlugin = true
+    ---- create link to icons -----
+    local icons_nvimtree = require("config.icons")
     ---- create on_attach  BEGINN   ---------------------------
     local function on_attach(bufnr)
       local api = require('nvim-tree.api')
@@ -19,11 +28,48 @@ return {
       local function opts(desc)
         return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
       end
+      -- You will need to insert "your code goes here" for any mappings with a custom action_cb
+      vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
+      -- TODO: close nvim-tree after select a file with <CR>
+      vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Close Directory'))
+      vim.keymap.set('n', 'v', api.node.open.vertical, opts('Open: Vertical Split'))
+--      vim.keymap.set('n', 'D', api.fs.trash, opts('Trash'))
+      vim.keymap.set('n', 'd', api.fs.remove, opts('Delete'))
+    end
+    ---- create on_attach  END      ---------------------------
 
-
-      -- Default mappings. Feel free to modify or remove as you wish.
-      --
-      -- BEGIN_DEFAULT_ON_ATTACH
+    local tree_cb = require("nvim-tree.config").nvim_tree_callback
+    require("nvim-tree").setup {
+      on_attach = on_attach,
+      update_focused_file = {
+        enable = true,
+        update_cwd = true,
+      },
+      -- TODO: use a config file for the icons
+      renderer = {
+        icons = {
+          glyphs = {
+            default = "",
+            symlink = "",
+            folder = icons_nvimtree.folder_nvimtree,
+            git = icons_nvimtree.git_nvimtree,
+          },
+        },
+      },
+      diagnostics = {
+        enable = true,
+        show_on_dirs = true,
+      },
+      view = {
+        width = 30,
+        side = "left",
+      },
+    }
+  end
+}
+-- Default mappings. Feel free to modify or remove as you wish.
+--
+-- BEGIN_DEFAULT_ON_ATTACH
 --      vim.keymap.set('n', '<C-]>', api.tree.change_root_to_node, opts('CD'))
 --      vim.keymap.set('n', '<C-e>', api.node.open.replace_tree_buffer, opts('Open: In Place'))
 --      vim.keymap.set('n', '<C-k>', api.node.show_info_popup, opts('Info'))
@@ -46,7 +92,7 @@ return {
 --      vim.keymap.set('n', '[c', api.node.navigate.git.prev, opts('Prev Git'))
 --      vim.keymap.set('n', ']c', api.node.navigate.git.next, opts('Next Git'))
 --      vim.keymap.set('n', 'd', api.fs.remove, opts('Delete'))
---      vim.keymap.set('n', 'D', api.fs.trash, opts('Trash'))
+--     vim.keymap.set('n', 'D', api.fs.trash, opts('Trash'))
 --      vim.keymap.set('n', 'E', api.tree.expand_all, opts('Expand All'))
 --      vim.keymap.set('n', 'e', api.fs.rename_basename, opts('Rename: Basename'))
 --      vim.keymap.set('n', ']e', api.node.navigate.diagnostics.next, opts('Next Diagnostic'))
@@ -58,7 +104,7 @@ return {
 --      vim.keymap.set('n', 'H', api.tree.toggle_hidden_filter, opts('Toggle Dotfiles'))
 --      vim.keymap.set('n', 'I', api.tree.toggle_gitignore_filter, opts('Toggle Git Ignore'))
 --      vim.keymap.set('n', 'J', api.node.navigate.sibling.last, opts('Last Sibling'))
---      --  vim.keymap.set('n', 'K',     api.node.navigate.sibling.first,       opts('First Sibling'))
+--      vim.keymap.set('n', 'K', api.node.navigate.sibling.first,       opts('First Sibling'))
 --      vim.keymap.set('n', 'm', api.marks.toggle, opts('Toggle Bookmark'))
 --      vim.keymap.set('n', 'o', api.node.open.edit, opts('Open'))
 --      vim.keymap.set('n', 'O', api.node.open.no_window_picker, opts('Open: No Window Picker'))
@@ -76,78 +122,4 @@ return {
 --      vim.keymap.set('n', 'Y', api.fs.copy.relative_path, opts('Copy Relative Path'))
 --      vim.keymap.set('n', '<2-LeftMouse>', api.node.open.edit, opts('Open'))
 --      vim.keymap.set('n', '<2-RightMouse>', api.tree.change_root_to_node, opts('CD'))
-      -- END_DEFAULT_ON_ATTACH
-
-
-      -- Mappings migrated from view.mappings.list
-      --
-      -- You will need to insert "your code goes here" for any mappings with a custom action_cb
-      vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
-      -- TODO: close nvim-tree after select a file with <CR>
-      --vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open') \| api.tree.close, opts('Close'))
-      vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Close Directory'))
-      vim.keymap.set('n', 'v', api.node.open.vertical, opts('Open: Vertical Split'))
-      --      vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
-    end
-    ---- create on_attach  END      ---------------------------
-
-    local tree_cb = require("nvim-tree.config").nvim_tree_callback
-    require("nvim-tree").setup {
-      on_attach = on_attach,
-      update_focused_file = {
-        enable = true,
-        update_cwd = true,
-      },
-      -- TODO: use a config file for the icons
-      renderer = {
-        icons = {
-          glyphs = {
-            default = "",
-            symlink = "",
-            folder = {
-              arrow_open = "",
-              arrow_closed = "",
-              default = "",
-              open = "",
-              empty = "",
-              empty_open = "",
-              symlink = "",
-              symlink_open = "",
-            },
-            git = git_nvimtree,
---                        git = {
---                          unstaged = "",
---                          staged = "S",
---                          unmerged = "",
---                          renamed = "➜",
---                          untracked = "U",
---                          deleted = "",
---                          ignored = "◌",
---                        },
-          },
-        },
-      },
-      diagnostics = {
-        enable = true,
-        show_on_dirs = true,
-        icons = {
-          hint = "",
-          info = "",
-          warning = "",
-          error = "",
-        },
-      },
-      view = {
-        width = 30,
-        side = "left",
-        mappings = {
-          list = {
-            { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-            { key = "h",                  cb = tree_cb "close_node" },
-            { key = "v",                  cb = tree_cb "vsplit" },
-          },
-        },
-      },
-    }
-  end
-}
+-- END_DEFAULT_ON_ATTACH
