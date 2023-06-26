@@ -1,9 +1,8 @@
 return {
-  -- FIX: maybe replace with neo-tree https://github.com/nvim-neo-tree/neo-tree.nvim
+  -- NOTE: maybe replace with neo-tree https://github.com/nvim-neo-tree/neo-tree.nvim
   'nvim-tree/nvim-tree.lua',
   enabled = true,
   event = 'VimEnter',
-  -- TODO: cleanup code
   version = "*",
   cmd = "NeoTree",
   dependencies = {
@@ -12,7 +11,7 @@ return {
     opts = { default = true }
   },
   keys = {
-    { "<leader>e", ":NvimTreeToggle<CR>", desc = "NvimTreeToggle" },
+    { "<leader>e", ":NvimTreeToggle<CR>", silent = true, remap = false, desc = "NvimTreeToggle" },
   },
 
   config = function()
@@ -20,7 +19,7 @@ return {
     vim.g.loaded_netrw = true
     vim.g.loaded_netrwPlugin = true
     ---- create link to icons -----
-    local icons_nvimtree = require("config.icons")
+    local icons_nvimtree = require("config.icons").nvimtree
     ---- create on_attach  BEGINN   ---------------------------
     local function on_attach(bufnr)
       local api = require('nvim-tree.api')
@@ -33,26 +32,25 @@ return {
       -- TODO: close nvim-tree after select a file with <CR>
       vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Close Directory'))
       vim.keymap.set('n', 'v', api.node.open.vertical, opts('Open: Vertical Split'))
---      vim.keymap.set('n', 'D', api.fs.trash, opts('Trash'))
+      --      vim.keymap.set('n', 'D', api.fs.trash, opts('Trash'))
       vim.keymap.set('n', 'd', api.fs.remove, opts('Delete'))
     end
     ---- create on_attach  END      ---------------------------
 
-    local tree_cb = require("nvim-tree.config").nvim_tree_callback
+    --    local tree_cb = require("nvim-tree.config").nvim_tree_callback
     require("nvim-tree").setup {
       on_attach = on_attach,
       update_focused_file = {
         enable = true,
         update_cwd = true,
       },
-      -- TODO: use a config file for the icons
       renderer = {
         icons = {
           glyphs = {
             default = "",
             symlink = "",
-            folder = icons_nvimtree.folder_nvimtree,
-            git = icons_nvimtree.git_nvimtree,
+            folder = icons_nvimtree.folder,
+            git = icons_nvimtree.git,
           },
         },
       },

@@ -1,34 +1,51 @@
 local icons = {
   ---- restart icons BEGINN  -----
-  ---- nvimtree BEGINN ----
 
-  git_nvimtree = {
-    unstaged = "",
-    staged = "S",
-    unmerged = "",
-    renamed = "➜",
-    untracked = "U",
-    deleted = "",
-    ignored = "◌",
-  },
-  folder_nvimtree = {
-    arrow_open = "",
-    arrow_closed = "",
-    default = "",
-    open = "",
-    empty = "",
-    empty_open = "",
-    symlink = "",
-    symlink_open = "",
-  },
-  icons_nvimtree = {
-    hint = "",
-    info = "",
-    warning = "",
-    error = "",
+  ---- nvimtree BEGINN ----
+  nvimtree = {
+    git = {
+      unstaged = "",
+      staged = "S",
+      unmerged = "",
+      renamed = "➜",
+      untracked = "U",
+      deleted = "",
+      ignored = "◌",
+    },
+    folder = {
+      arrow_open = "",
+      arrow_closed = "",
+      default = "",
+      open = "",
+      empty = "",
+      empty_open = "",
+      symlink = "",
+      symlink_open = "",
+    },
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
+    },
   },
   ---- nvimtree END ----
-  --
+  -- lualine BEGIN --
+  lualine = {
+    diagnostic_symbols = {
+      error = " ",
+      warn = " ",
+      info = "",
+      hint = " ",
+    },
+    diff = {
+      added = " ",
+      modified = " ",
+      removed = " ",
+    },
+  },
+
+  -- lualine END --
   ---- restart icons END  -----
   kind = {
     Array = "",
@@ -217,11 +234,6 @@ local icons = {
     Smiley = "",
     Package = "",
     CircuitBoard = "",
-  },
-  lualine_diff = {
-    added = " ",
-    modified = " ",
-    removed = " ",
   },
 }
 return icons
