@@ -1,30 +1,24 @@
 -- eventually use navic for statusline
 -- https://alpha2phi.medium.com/neovim-for-beginners-status-line-dd0c97fba978
+-- https://github.com/SmiteshP/nvim-navic
 return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
-  requires={
+  requires = {
     "nvim-web-devicons"
   },
-  enabled = false,
+  enabled = true,
   --------------- lualine config ---------------------------
   config = function()
-    local icons = require("config.icons")
-    -- todo clean up code
-    local branch = {
-      "branch",
-      icons_enabled = true,
-      icon = "",
-    }
+    --- link to icons --
+    local icons = require("config.icons").lualine
     local diagnostics = {
       "diagnostics",
-      -- NOTE: check diff diagnostics
       -- Table of diagnostic sources, available sources are:
       --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
       sources = { "nvim_diagnostic" },
-      -- sections = { "error", "warn" },
       sections = { "error", "warn", "info", "hint" },
-      symbols = { error = " ", warn = " ", info = "", hint = "" },
+      symbols = icons.diagnostic_symbols,
       diagnostics_color = {
         -- Same values as the general color option can be used here.
         error = 'DiagnosticError', -- Changes diagnostics' error color.
@@ -32,17 +26,10 @@ return {
         info  = 'DiagnosticInfo',  -- Changes diagnostics' info color.
         hint  = 'DiagnosticHint',  -- Changes diagnostics' hint color.
       },
-      colored = false,
+      colored = true,
       update_in_insert = false,
-      always_visible = true,
+      always_visible = false,
     }
-    local mode = {
-      "mode",
-      fmt = function(str)
-        return "-- " .. str .. " --"
-      end,
-    }
-
     local hide_in_width = function()
       return vim.fn.winwidth(0) > 80
     end
@@ -50,7 +37,7 @@ return {
     local diff = {
       "diff",
       colored = true,
-      symbols = icons.lualine_diff,
+      symbols = icons.diff,
       cond = hide_in_width,
       diff_color = {
         -- Same color values as the general color option can be used here.
@@ -66,35 +53,46 @@ return {
       "filetype",
       colored = true,
       icon_only = false,
-      --icons_enabled = false,
-      --icon = nil,
     }
     local location = {
       "location",
       padding = 0,
+    }
+    local buffers = {
+      "buffers",
+      mode = 2,
+      max_length = vim.o.columns * 2 / 3,
+      filetype_names = {
+        TelescopePrompt = 'Telescope',
+        dashboard = 'Dashboard',
+        packer = 'Packer',
+        fzf = 'FZF',
+        alpha = 'Alpha'
+      },
+    }
+    local mode = {
+      "mode",
+      icons_enabled = false,
     }
     ----------- setup lualine ---------------------
     require('lualine').setup {
       options = {
         icons_enabled = true,
         theme = "auto",
-        -- theme = "onedark",
-        component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
-        --disabled_filetypes = { "alpha", "dashboard", "NvimTree", "Outline" },
+        component_separators = { left = "", right = "" },
         disabled_filetypes = { "alpha", "dashboard", },
         always_divide_middle = true,
       },
 
       sections = {
-        -- lualine_a = { branch, diagnostics },
         lualine_a = { 'mode' },
         lualine_b = { 'branch' },
-        lualine_c = { 'diagnostics' },
-        -- lualine_x = { "encoding", "fileformat", "filetype" },
-        lualine_x = { diff, spaces, filetype },
-        lualine_y = { 'location' },
-        lualine_z = { 'progress' },
+        lualine_c = { diagnostics },
+
+        lualine_x = { diff },
+        lualine_y = { 'filetype' },
+        lualine_z = { 'windows' }
       },
 
     }

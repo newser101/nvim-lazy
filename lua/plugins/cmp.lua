@@ -1,7 +1,7 @@
 return {
-"hrsh7th/nvim-cmp",
---  version = "*", -- last release is way too old
- -- event = "InsertEnter",
+  "hrsh7th/nvim-cmp",
+  version = "*", -- last release is way too old
+  -- event = "InsertEnter",
   dependencies = {
     "neovim/nvim-lspconfig",
     "hrsh7th/cmp-nvim-lsp",
@@ -9,127 +9,127 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
     "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-nvim-lua",
-    "saadparwaiz1/cmp_luasnip",
+    "hrsh7th/cmp-nvim-lua", -- TODO: if needed
     -- For luasnip users.
-    {"L3MON4D3/LuaSnip",
-    dependencies={
-      "rafamadriz/friendly-snippets",
-    },
-  },
-  },
--- NOTE: check best event={}
-event={
-  "InsertEnter",
-  "CmdlineEnter",
-},
--- TODO: replace with zbirenbaum/copilot.lua
-
-config = function()
----- config ------
-local cmp = require("cmp")
-local luasnip = require("luasnip")
-require("luasnip.loaders.from_snipmate").lazy_load{path = vim.fn.stdpath "config" .. "/snippets/snipmate"} -- new
-require("luasnip.loaders.from_vscode").lazy_load()
-local icons= require("config.icons")  -- load icons from config/icons 
-
----- function for mapping
-local check_backspace = function()
-  local col = vim.fn.col "." - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-end
--------------------------
-
----- setup cmp ------
-cmp.setup({
-  --- recommended setup from https://github.com/hrsh7th/nvim-cmp
-  snippet = {
-      expand = function(args)
-        luasnip.lsp_expand(args.body) -- For `luasnip` users.
-      end,
-    },
-    ----- mapping 
-    mapping = cmp.mapping.preset.insert {
---       behavior=cmp.ConfirmBehavior.Replace,
---      ["<C-k>"] = cmp.mapping.select_prev_item(),
-      ["C-k"] = cmp.mapping.select_prev_item({behavior=cmp.SelectBehavior.Insert}),
---      ["<C-j>"] = cmp.mapping.select_next_item({behavior=cmp.n.insert}),
-      ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-      ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-      ["<C-Space>"] = cmp.mapping.complete(cmp.mapping.complete(),{ "i", "c" }),
-      ["<C-e>"] = cmp.mapping {
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
+    "saadparwaiz1/cmp_luasnip",
+    {
+      "L3MON4D3/LuaSnip",
+      dependencies = {
+        "rafamadriz/friendly-snippets",
       },
-      -- Super Tab
-      -- Accept currently selected item. If none selected, `select` first item.
-      -- Set `select` to `false` to only confirm explicitly selected items.
-      ["<CR>"] = cmp.mapping.confirm { select = true },
-      ["<Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        elseif luasnip.expandable() then
-          luasnip.expand()
-        elseif luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
-        elseif check_backspace() then
-          fallback()
-        else
-          fallback()
-        end
-      end, {
-        "i",
-        "s",
-      }),
-      ["<S-Tab>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
-          luasnip.jump(-1)
-        else
-          fallback()
-        end
-      end, {
-        "i",
-        "s",
-      }),
     },
+  },
+  --  enabled = true,
+  -- TODO: check best event={}
+  event = { "InsertEnter", "CmdlineEnter" },
 
-    formatting = {
-      fields = { "kind", "abbr", "menu" },
-      format = function(entry, vim_item)
-        local kind_icons=icons.kind_cmp -- load icons from config/icons
-        vim_item.kind = kind_icons[vim_item.kind]
-        vim_item.menu = ({
-          nvim_lsp = "LSP",
-          nvim_lua = "NVIM_LUA",
-          luasnip = "Snippet",
-          buffer = "Buffer",
-          path = "Path",
---          emoji = "",
-        })[entry.source.name]
-        return vim_item
+  config = function()
+    local cmp = require("cmp")
+    local luasnip = require("luasnip")
+    require("luasnip.loaders.from_vscode").lazy_load()
+
+    ---- function for SuperTAB ----
+    local check_backspace = function()
+      local col = vim.fn.col "." - 1
+      return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+    end
+
+    ---- setup cmp ------
+    cmp.setup({
+      view = {
+        entries = { name = 'custom', selection_order = 'near_cursor' }
+      },
+      snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
+      },
+      ---- Disable completion in Comments
+      enabled = function()
+        local context = require 'cmp.config.context'
+        -- keep command mode completion enabled when cursor is in a comment
+        if vim.api.nvim_get_mode().mode == 'c' then
+          return true
+        else
+          return not context.in_treesitter_capture("comment")
+              and not context.in_syntax_group("Comment")
+        end
       end,
-    },
-    sources = {
-      { name = "nvim_lsp" },
-      { name = "nvim_lua" },
-      { name = "luasnip" },
-      { name = "buffer" },
-      { name = "path" },
-    },
-    confirm_opts = {
-      behavior=cmp.ConfirmBehavior.Replace,
-      select=false,
-    },
-    window={
-      compltion=cmp.config.window.bordered(),
-      documention=cmp.config.window.bordered(),
-          },
-    experimental={
-      ghost_text=false,
-      native_menu=false,
-    },
-})
-end,
+      ---- SuperTAB ----
+      mapping = cmp.mapping.preset.insert {
+        ["<C-k>"] = cmp.mapping.select_prev_item(),
+        ["<C-j>"] = cmp.mapping.select_next_item(),
+        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+        ["<C-e>"] = cmp.mapping {
+          i = cmp.mapping.abort(),
+          c = cmp.mapping.close(),
+        },
+        -- Accept currently selected item. If none selected, `select` first item.
+        -- Set `select` to `false` to only confirm explicitly selected items.
+        ["<CR>"] = cmp.mapping.confirm { select = true },
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          elseif luasnip.expandable() then
+            luasnip.expand()
+          elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+          elseif check_backspace() then
+            fallback()
+          else
+            fallback()
+          end
+        end, {
+          "i",
+          "s",
+        }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+          else
+            fallback()
+          end
+        end, {
+          "i",
+          "s",
+        }),
+      },
+
+      formatting = {
+        fields = { "kind", "abbr", "menu" },
+        format = function(entry, vim_item)
+          -- Kind icons
+          local kind_icons = require("config.icons").cmp.kind_icons
+          vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+          -- Source
+          vim_item.menu = ({
+            nvim_lsp = "[LSP]",
+            luasnip = "[LuaSnip]",
+            nvim_lua = "[Lua]",
+            buffer = "[Buffer]",
+            path = "[Path]",
+          })[entry.source.name]
+          return vim_item
+        end
+      },
+      sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = "luasnip" },
+        { name = "nvim_lua" },
+        { name = "buffer" },
+        { name = "path" },
+      }),
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      },
+      experimental = {
+        ghost_text = true,
+      },
+    })
+  end,
 }

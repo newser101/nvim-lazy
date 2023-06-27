@@ -1,14 +1,7 @@
 return {
-  {
-    "nvim-tree/nvim-web-devicons",
-    lazy = true,
-    opts = { default = true }
-  },
   "famiu/bufdelete.nvim",
   "nvim-lua/plenary.nvim",
   "BurntSushi/ripgrep",
-  --- insert indent_blankline ---
-  --- insert indent_blankline ---
   {
     "RRethy/vim-illuminate",
     event = "VeryLazy",
@@ -57,11 +50,20 @@ return {
       local Terminal = require('toggleterm.terminal').Terminal
       local lazygit  = Terminal:new({ cmd = "lazygit", hidden = true })
 
-      function _lazygit_toggle()
+      function lazygit_toggle()
         lazygit:toggle()
       end
 
-      vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua lazygit_toggle()<CR>", { noremap = true, silent = true })
     end
   },
+
+  {
+    "simrat39/symbols-outline.nvim",
+    opts = {},
+    keys = {
+      { "<leader>tt", "<cmd>SymbolsOutline<CR>", desc = "Toggle symbols " },
+    },
+  },
+
 }

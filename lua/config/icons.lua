@@ -1,66 +1,98 @@
-local icons= {
-  kind = {
+local icons = {
+  ---- restart icons BEGINN  -----
+
+  ---- nvimtree BEGINN ----
+  nvimtree = {
+    git = {
+      unstaged = "",
+      staged = "S",
+      unmerged = "",
+      renamed = "➜",
+      untracked = "U",
+      deleted = "",
+      ignored = "◌",
+    },
+    folder = {
+      arrow_open = "",
+      arrow_closed = "",
+      default = "",
+      open = "",
+      empty = "",
+      empty_open = "",
+      symlink = "",
+      symlink_open = "",
+    },
+    icons = {
+      hint = "",
+      info = "",
+      warning = "",
+      error = "",
+    },
+  },
+  ---- nvimtree END ----
+
+  -- lualine BEGIN --
+  lualine = {
+    diagnostic_symbols = {
+      error = " ",
+      warn = " ",
+      info = "",
+      hint = " ",
+    },
+    diff = {
+      added = " ",
+      modified = " ",
+      removed = " ",
+    },
+  },
+  -- lualine END --
+
+  -- cmp BEGINN
+  cmp = {
+    kind_icons = {
+      Text = "",
+      Method = "m",
+      Function = "󰡱",
+      Constructor = "",
+      Field = "",
+      Variable = "󰫧",
+      Class = "",
+      Interface = "",
+      Module = "",
+      Property = "",
+      Unit = '  ',
+      Value = "",
+      Enum = "",
+      Keyword = "󰌋",
+      Snippet = "",
+      Color = "",
+      File = "",
+      Reference = "",
+      Folder = "",
+      EnumMember = "",
+      Constant = "󰇽",
+      Struct = "",
+      Event = "",
+      Operator = "",
+      TypeParameter = "",
+      Codeium = "󰚩",
+      Copilot = "",
+    },
+  },
+  -- cmp END
+  ---- restart icons END  -----
+  cmp_kinds = {
+  },
+  kinduu = {
     Array = "",
     Boolean = "",
-    Class = "",
-    Color = "",
-    Constant = "",
-    Constructor = "",
-    Enum = "",
-    EnumMember = "",
-    Event = "",
-    Field = "",
-    File = "",
-    Folder = "󰉋",
-    Function = "",
-    Interface = "",
     Key = "",
-    Keyword = "",
-    Method = "",
-    Module = "",
     Namespace = "",
     Null = "󰟢",
     Number = "",
     Object = "",
-    Operator = "",
     Package = "",
-    Property = "",
-    Reference = "",
-    Snippet = "",
     String = "",
-    Struct = "",
-    Text = "",
-    TypeParameter = "",
-    Unit = "",
-    Value = "",
-    Variable = "",
-  },
-  kind_cmp={
-    Text = "",
-    Method = "",
-    Function = "",
-    Constructor = "",
-    Field = "",
-    Variable = "",
-    Class = "",
-    Interface = "",
-    Module = "",
-    Property = "",
-    Unit = "",
-    Value = "",
-    Enum = "",
-    Keyword = "",
-    Snippet = "",
-    Color = "",
-    File = "",
-    Reference = "",
-    Folder = "",
-    EnumMember = "",
-    Constant = "",
-    Struct = "",
-    Event = "",
-    Operator = "",
-    TypeParameter = "",
   },
   git = {
     LineAdded = "",
@@ -78,10 +110,10 @@ local icons= {
     Octoface = "",
     Branch = "",
   },
-  gitsigns= {
+  gitsigns = {
     add          = { text = '' },
     change       = { text = '' },
-    delete       = { text = ''},
+    delete       = { text = '' },
     topdelete    = { text = '' },
     changedelete = { text = '~' },
     untracked    = { text = '┆' },
@@ -186,11 +218,6 @@ local icons= {
     Smiley = "",
     Package = "",
     CircuitBoard = "",
-  },
-  lualine_diff ={
-    added = " ",
-    modified = " ",
-    removed = " ",
   },
 }
 return icons
