@@ -11,17 +11,17 @@ return {
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-nvim-lua", -- TODO: if needed
     -- For luasnip users.
+    "saadparwaiz1/cmp_luasnip",
     {
       "L3MON4D3/LuaSnip",
       dependencies = {
-        "saadparwaiz1/cmp_luasnip",
         "rafamadriz/friendly-snippets",
       },
     },
   },
   --  enabled = true,
   -- TODO: check best event={}
-  event={"InsertEnter","CmdlineEnter"},
+  event = { "InsertEnter", "CmdlineEnter" },
 
   config = function()
     local cmp = require("cmp")
@@ -36,6 +36,9 @@ return {
 
     ---- setup cmp ------
     cmp.setup({
+      view = {
+        entries = { name = 'custom', selection_order = 'near_cursor' }
+      },
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -96,23 +99,23 @@ return {
         }),
       },
 
- formatting = {
-    format = function(entry, vim_item)
-      -- Kind icons
-      local kkind_icons=require("config.icons").cmp.kind_icons
-      --vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-      vim_item.kind = string.format('%s %s', kkind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-      -- Source
-      vim_item.menu = ({
-        nvim_lsp = "[LSP]",
-        luasnip = "[LuaSnip]",
-        nvim_lua = "[Lua]",
-        buffer = "[Buffer]",
-        path="[Path]",
-      })[entry.source.name]
-      return vim_item
-    end
-  },
+      formatting = {
+        fields = { "kind", "abbr", "menu" },
+        format = function(entry, vim_item)
+          -- Kind icons
+          local kind_icons = require("config.icons").cmp.kind_icons
+          vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+          -- Source
+          vim_item.menu = ({
+            nvim_lsp = "[LSP]",
+            luasnip = "[LuaSnip]",
+            nvim_lua = "[Lua]",
+            buffer = "[Buffer]",
+            path = "[Path]",
+          })[entry.source.name]
+          return vim_item
+        end
+      },
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = "luasnip" },
@@ -123,6 +126,9 @@ return {
       window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
+      },
+      experimental = {
+        ghost_text = true,
       },
     })
   end,
