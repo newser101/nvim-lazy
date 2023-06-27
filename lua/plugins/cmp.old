@@ -18,6 +18,7 @@ return {
     },
   },
   },
+  enabled = false,
 -- NOTE: check best event={}
 event={
   "InsertEnter",
@@ -110,7 +111,6 @@ cmp.setup({
         })[entry.source.name]
         return vim_item
       end,
-    },
     sources = {
       { name = "nvim_lsp" },
       { name = "nvim_lua" },
@@ -118,6 +118,7 @@ cmp.setup({
       { name = "buffer" },
       { name = "path" },
     },
+  },
     confirm_opts = {
       behavior=cmp.ConfirmBehavior.Replace,
       select=false,
