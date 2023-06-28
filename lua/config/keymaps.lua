@@ -19,7 +19,7 @@ vim.g.mapleader = " "
 -- Normal --
 keymap("n", "<leader>p", ":exec 'w | !python3 %'<CR>", opts)  --run python file 
 keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", opts) -- run bash file 
-keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts) -- run bash file 
+keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts) -- run lua file 
 keymap("n","<leader>w",":exec 'w' <CR>",opts) -- save file
 keymap("n","<leader>q",":exec 'q' <CR>",opts) -- quit file
 keymap("n","ee","$",opts) --  jump to the end

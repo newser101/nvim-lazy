@@ -8,11 +8,11 @@ return {
     { "folke/neodev.nvim",  opts = {} },
     "hrsh7th/cmp-nvim-lsp",
   },
-  enabled = true,
+  enabled = false,
 
   config = function()
     -- Add additional capabilities supported by nvim-cmp
-    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+--    local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 
     local lspconfig = require("lspconfig")
