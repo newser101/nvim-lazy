@@ -52,24 +52,23 @@ return {
       "lua_ls",
       "pyright",
     }
---    local settings = {
---      lua_ls = {
---        print("local settings"),
---      Lua = {
---        workspace = {   -- NOTE: need for 'luv' bug
---          checkThirdParty = false,
---        },
---        completion = {
---          callSnippet = "Replace",
---        },
---        telemetry = {
---          enable = false
---        },
---      },
---      },
---      pyright = {
---      },
---    }
+    --    local settings = {
+    --      lua_ls = {
+    --      Lua = {
+    --        workspace = {   -- NOTE: need for 'luv' bug
+    --          checkThirdParty = false,
+    --        },
+    --        completion = {
+    --          callSnippet = "Replace",
+    --        },
+    --        telemetry = {
+    --          enable = false
+    --        },
+    --      },
+    --      },
+    --      pyright = {
+    --      },
+    --    }
 
     -- create attach to parse
     local on_attach = function(client, bufnr)
@@ -78,33 +77,33 @@ return {
       require("illuminate").on_attach(client)
     end
 
-        for _, server in pairs(servers) do
-          Opts = {
-            on_attach = on_attach,
-            capabilities = capabilities,
-          }
-          server = vim.split(server, "@")[1]
---          print(server)
---          local require_ok, conf_opts = pcall(require, "settings." .. server)
-          local require_ok, conf_opts = pcall(require("config.settings").lsp.lua_ls_settings)
-          if require_ok then
-            Opts = vim.tbl_deep_extend("force", conf_opts, Opts)
-          end
-          print("settings not loaded")
-          lspconfig[server].setup(Opts)
-        end
---    ---- to delete BEGINN -----
---    lspconfig.pyright.setup {
---      capabilities = capabilities
---    }
---    lspconfig.lua_ls.setup {
---      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true }),
---      vim.keymap.set('n', '<space>lf', function()
---        vim.lsp.buf.format { async = true }
---      end, { noremap = true, silent = true }),
---      settings = require("config.settings").lsp.lua_ls_settings,
---      capabilities = cmp_nvim_lsp.default_capabilities()
---    }
---    ---- to delete END -----
+    for _, server in pairs(servers) do
+      Opts = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
+      server = vim.split(server, "@")[1]
+
+      local require_ok, conf_opts = pcall(require, "settings." .. server)
+      --local require_ok, conf_opts = pcall(require("config.settings").lsp.lua_ls_settings)
+      if require_ok then
+        Opts = vim.tbl_deep_extend("force", conf_opts, Opts)
+        print("settings loaded")
+      end
+      lspconfig[server].setup(Opts)
+    end
+    --    ---- to delete BEGINN -----
+    --    lspconfig.pyright.setup {
+    --      capabilities = capabilities
+    --    }
+    --    lspconfig.lua_ls.setup {
+    --      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = true, silent = true }),
+    --      vim.keymap.set('n', '<space>lf', function()
+    --        vim.lsp.buf.format { async = true }
+    --      end, { noremap = true, silent = true }),
+    --      settings = require("config.settings").lsp.lua_ls_settings,
+    --      capabilities = cmp_nvim_lsp.default_capabilities()
+    --    }
+    --    ---- to delete END -----
   end
 }
