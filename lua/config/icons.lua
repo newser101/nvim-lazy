@@ -81,19 +81,6 @@ local icons = {
   },
   -- cmp END
   ---- restart icons END  -----
-  cmp_kinds = {
-  },
-  kinduu = {
-    Array = "",
-    Boolean = "",
-    Key = "",
-    Namespace = "",
-    Null = "󰟢",
-    Number = "",
-    Object = "",
-    Package = "",
-    String = "",
-  },
   git = {
     LineAdded = "",
     LineModified = "",

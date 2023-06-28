@@ -98,9 +98,8 @@ return {
           "s",
         }),
       },
-
       formatting = {
-        fields = { "kind", "abbr", "menu" },
+        fields = { "abbr", "kind", "menu" },
         format = function(entry, vim_item)
           -- Kind icons
           local kind_icons = require("config.icons").cmp.kind_icons
