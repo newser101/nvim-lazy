@@ -8,7 +8,8 @@ return {
     lazy = true,
   },
   config = function()
-    local ensure_installed = require("config.lsphandlers").mason_ensure_installed
+--    local ensure_installed = require("config.lsphandlers").mason_ensure_installed
+    local ensure_installed = require("lsp.lspserver")
     local settings = {
       ui = {
         border = "none",
