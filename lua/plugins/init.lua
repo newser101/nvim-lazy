@@ -65,5 +65,4 @@ return {
       { "<leader>tt", "<cmd>SymbolsOutline<CR>", desc = "Toggle symbols " },
     },
   },
-
 }

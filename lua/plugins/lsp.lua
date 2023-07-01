@@ -1,116 +1,72 @@
+-- https://blog.codeminer42.com/configuring-language-server-protocol-in-neovim/
 return {
   "neovim/nvim-lspconfig",
+  lazy = true,
   event = { "BufReadPre", "BufNewFile" },
-  cmd = { "LspInfo", "LspInstall", "LspUninstall" },
-  --     lazy = true, -- NOTE: check
   dependencies = {
-    --{ "folke/neoconf.nvim", cmd = "Neoconf", config = true }, -- NOTE: produce an error in healthcheck
-    { "folke/neodev.nvim",
-      --    "williamboman/nvim-lsp-installer",
-      --     "williamboman/mason.nvim",
-      --     "williamboman/mason-lspconfig.nvim",
-      "hrsh7th/cmp-nvim-lsp", -- in cmp.lua
-    },
+    { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
+    { "folke/neodev.nvim",  opts = {} },
+    "hrsh7th/cmp-nvim-lsp",
   },
-  enabled=false,
-  -- TODO: clean up code
-  keys = {
-    --  TODO: edit keymaps for my uses
-    { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>",        desc = "Code Action" },
-    { "gd",         "<cmd>lua vim.lsp.buf.definition()<CR>",         desc = "Goto Definition" },
-    { "<leader>ld", "<cmd>Telescope lsp_document_diagnostics<cr>",   desc = "Document Diagnostics" },
-    { "<leader>lw", "<cmd>Telescope lsp_workspace_diagnostics<cr>",  desc = "Workspace Diagnostics" },
-    { "<leader>li", "<cmd>LspInfo<cr>",                              desc = "Info" },
-    { "<leader>lI", "<cmd>LspInstallInfo<cr>",                       desc = "Installer Info" },
-    { "<leader>lj", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",   desc = "Next Diagnostic" },
-    { "<leader>lk", "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",   desc = "Prev Diagnostic" },
-    { "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>",           desc = "CodeLens Action" },
-    { "<leader>lq", "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", desc = "Quickfix" },
-    { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>",             desc = "Rename" },
-    { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>",       desc = "Document Symbols" },
+  enabled = true,
 
-  },
-
-  -----------config------------
   config = function()
-    local cmp_nvim_lsp = require "cmp_nvim_lsp"
+    ---- global kemaps
+    -- TODO: customize keymaps
+    vim.keymap.set('n', 'gl', vim.diagnostic.open_float)
+    vim.keymap.set('n', '<leader>lk', vim.diagnostic.goto_prev)
+    vim.keymap.set('n', '<leader>lj', vim.diagnostic.goto_next)
+    vim.keymap.set('n', '<leader>lq', vim.diagnostic.setloclist)
 
 
+    --  capabilities supported by nvim-cmp
+    local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-    local lspconfig = require('lspconfig')
 
-    --    local on_attach = function (client,bufnr)
-    --       if client.name == "lua_ls" then
-    --      client.server_capabilities.documentFormattingProvider = false
-    --    end
-    --      lsp_keymaps(bufnr)
-    --      require("lua.plugins.illuminate").on_attach(client)
-    --
-    --    end
-    -------- setup servers BEGINN ---------------
-    lspconfig.pyright.setup {} -- TODO: buil serverlist in config
-    --
-    lspconfig.lua_ls.setup {
-      settings=require("config.settings").lsp.lua_ls_settings
---      settings = {
---        Lua = {
---          workspace = { -- NOTE: need for 'luv' bug
---            checkThirdParty = false,
---          },
---          completion = {
---            callSnippet = "Replace",
---          },
---          telemetry = {
---            enable = false
---          },
---        },
---      },
-    }
-    -------- setup servers END ---------------
-
-    local signs = {
-      { name = "DiagnosticSignError", text = "" },
-      { name = "DiagnosticSignWarn",  text = "" },
-      { name = "DiagnosticSignHint",  text = "" },
-      { name = "DiagnosticSignInfo",  text = "" },
-    }
-
-    for _, sign in ipairs(signs) do
-      vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+    -- local Keymaps to parse to lsp setup
+    local function lsp_keymaps(bufnr)
+      local opts = { noremap = true, silent = true }
+      vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+      vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+      vim.keymap.set('n', '<leader>ls', vim.lsp.buf.signature_help, opts)
+--      vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+--      vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+--      vim.keymap.set('n', '<space>wl', function()
+--        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+--      end, opts)
+      vim.keymap.set('n', '<leader>ld', vim.lsp.buf.type_definition, opts)
+      vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+      vim.keymap.set({ 'n', 'v' }, '<leader>la', vim.lsp.buf.code_action, opts)
+      vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+      vim.keymap.set('n', '<space>lf', function()
+        vim.lsp.buf.format { async = true }
+      end, opts)
     end
 
+    local lspconfig = require("lspconfig")
+    local servers = require("lsp.lspserver")
+    local on_attach = function(client, bufnr)
+      lsp_keymaps(bufnr)
+      -- NOTE:check illuminate
+      require("illuminate").on_attach(client)
+    end
 
-    local config = {
-      -- disable virtual text
-      virtual_text = true,
-      -- show signs
-      signs = {
-        active = signs,
-      },
-      update_in_insert = true,
-      underline = true,
-      severity_sort = true,
-      float = {
-        focusable = false,
-        style = "minimal",
-        border = "rounded",
-        source = "always",
-        header = "",
-        prefix = "",
-        suffix = "",
-      },
-    }
+    for _, server in pairs(servers) do
+      Opts = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
+      server = vim.split(server, "@")[1]
 
-    vim.diagnostic.config(config)
-
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-      border = "rounded",
-    })
-
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-      border = "rounded",
-    })
-  end,
+      local require_ok, conf_opts = pcall(require, "lsp." .. server)
+      if require_ok then
+        Opts = vim.tbl_deep_extend("force", conf_opts, Opts)
+      end
+      lspconfig[server].setup(Opts)
+    end
+  end
 }
