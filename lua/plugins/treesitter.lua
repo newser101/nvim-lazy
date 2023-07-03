@@ -3,7 +3,7 @@ return {
   build = function()
     require("nvim-treesitter.install").update({ with_sync = true })
   end,
-
+  enabled = false,
   ------ minimum setup BEGINN -------
   config = function()
     require("nvim-treesitter.configs").setup({
