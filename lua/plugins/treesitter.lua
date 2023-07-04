@@ -27,7 +27,6 @@ return {
       },
 
       autopairs=true,
-      
     })
   end,
   ------ minimum setup END -------
