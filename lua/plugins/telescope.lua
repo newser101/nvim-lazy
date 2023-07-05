@@ -7,6 +7,8 @@ return {
     dependencies={
       'nvim-lua/plenary.nvim'
     },
+  enabled=false,
+
 config = function ()
   -- FIX:cleanup code 
   -- 
