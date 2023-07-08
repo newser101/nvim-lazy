@@ -3,4 +3,5 @@ return{
   "lua_ls",
   "pyright",
   "bashls",
+  "jsonls",
 }
