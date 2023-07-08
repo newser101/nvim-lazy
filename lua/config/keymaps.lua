@@ -17,12 +17,11 @@ vim.g.mapleader = " "
 
 -- my keymaps BEGINN
 -- Normal --
-keymap("n", "<leader>p", ":exec 'w | !python3 %'<CR>", opts)  --run python file 
-keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", opts) -- run bash file 
-keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts) -- run lua file 
-keymap("n","<leader>w",":exec 'w' <CR>",opts) -- save file
-keymap("n","<leader>q",":exec 'q' <CR>",opts) -- quit file
-keymap("n","ee","$",opts) --  jump to the end
+keymap("n", "<leader>p", ":exec 'w | !python3 %'<CR>", opts) --run python file
+keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", opts)    -- run bash file
+keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts)     -- run lua file
+keymap("n", "<leader>w", ":exec 'w' <CR>", opts)             -- save file
+keymap("n", "<leader>q", ":exec 'q' <CR>", opts)             -- quit file
 -- my keymaps END
 
 -- Normal --
@@ -83,8 +82,8 @@ keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 -- keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 
 -- Comment
---keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
---keymap("x", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
+keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
+keymap("x", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
 
 -- DAP
 --keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
