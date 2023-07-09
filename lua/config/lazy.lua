@@ -9,8 +9,8 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath })
 end
 
-vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
---vim.opt.rtp:prepend(lazypath)
+-- vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " " -- make sure to set `mapleader` before lazy so your mappings are correct
 

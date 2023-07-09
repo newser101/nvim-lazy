@@ -1,6 +1,7 @@
 return {
   "famiu/bufdelete.nvim",
   "nvim-lua/plenary.nvim",
+  version="*",
   "BurntSushi/ripgrep",
   {
     "RRethy/vim-illuminate",
