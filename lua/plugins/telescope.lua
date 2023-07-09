@@ -23,21 +23,12 @@ return {
 						["<C-j>"] = actions.move_selection_next,
 					},
 				},
-        theme="dropdown",
+        -- theme="dropdown",
 			},
 			pickers = {
-				-- find_files = {
-				-- 	mappings = {
-				-- 		i = {
-				-- 			["<C-p>"] = false,
-				-- 			["<C-n>"] = false,
-				-- 			["<C-k>"] = actions.move_selection_previous,
-				-- 			["<C-j>"] = actions.move_selection_next,
-				-- 			["jk"] = "close",
-				-- 		},
-				-- 	},
-				-- 	theme = "dropdown",
-				-- },
+				find_files = {
+					theme = "dropdown",
+				},
 			},
 			extensions = {
 				fzf = {
