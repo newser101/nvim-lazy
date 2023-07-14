@@ -14,6 +14,7 @@ return {
     --		local completion = null_ls.builtins.completion
     	local hover = null_ls.builtins.hover
 
+<<<<<<< HEAD
     null_ls.setup({
       -- NOTE: check if needed (maybe diagnostics)
       debug = false,
@@ -42,4 +43,30 @@ return {
       },
     })
   end,
+=======
+		null_ls.setup({
+			-- NOTE: check if needed (maybe diagnostics)
+			debug = false,
+			--      log_level = "off",  -- if off :NULLINFO didnt work
+			sources = {
+				-- lua --
+				formatting.stylua, -- lua
+				diagnostics.luacheck.with({
+					extra_args = { "--allow_defined" },
+				}),
+				-- python --
+				formatting.black, -- python
+				diagnostics.flake8,
+				-- shell --
+				formatting.beautysh,
+				diagnostics.shellcheck,
+        -- markdown
+        formatting.mdformat,
+        diagnostics.markdownlint,
+				-- --
+				formatting.prettier, -- CSS, Flow, HTML, JSON, JSX, JavaScript, LESS, Markdown, SCSS, TypeScript, Vue, YAML
+			},
+		})
+	end,
+>>>>>>> markdown
 }
