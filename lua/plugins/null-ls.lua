@@ -12,7 +12,7 @@ return {
     local diagnostics = null_ls.builtins.diagnostics
     local code_actions = null_ls.builtins.code_actions
     --		local completion = null_ls.builtins.completion
-    --		local hover = null_ls.builtins.hover
+    	local hover = null_ls.builtins.hover
 
     null_ls.setup({
       -- NOTE: check if needed (maybe diagnostics)
@@ -28,11 +28,17 @@ return {
         formatting.black, -- python
         diagnostics.flake8,
         -- shell --
-        formatting.beautysh,
+        -- formatting.beautysh,
+        formatting.shfmt,
+        -- formatting.shellharden,
         diagnostics.shellcheck,
-        code_actions.shellcheck,
-        -- --
+        -- code_actions.shellcheck,
+        -- hover.printenv,
+        -- rest --
         formatting.prettier, -- CSS, Flow, HTML, JSON, JSX, JavaScript, LESS, Markdown, SCSS, TypeScript, Vue, YAML
+        -- formatting.codespell,
+        -- markdown 
+        formatting.cbfmt,
       },
     })
   end,
