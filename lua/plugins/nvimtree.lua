@@ -1,14 +1,14 @@
 return {
   -- NOTE: maybe replace with neo-tree https://github.com/nvim-neo-tree/neo-tree.nvim
-  'nvim-tree/nvim-tree.lua',
+  "nvim-tree/nvim-tree.lua",
   enabled = true,
-  event = 'VimEnter',
+  event = "VimEnter",
   version = "*",
   cmd = "NeoTree",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
     lazy = true,
-    opts = { default = true }
+    opts = { default = true },
   },
   keys = {
     { "<leader>e", ":NvimTreeToggle<CR>", silent = true, remap = false, desc = "NvimTreeToggle" },
@@ -22,23 +22,25 @@ return {
     local icons_nvimtree = require("config.icons").nvimtree
     ---- create on_attach  BEGINN   ---------------------------
     local function on_attach(bufnr)
-      local api = require('nvim-tree.api')
+      local api = require("nvim-tree.api")
 
       local function opts(desc)
-        return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
       end
       -- You will need to insert "your code goes here" for any mappings with a custom action_cb
-      vim.keymap.set('n', '<CR>', api.node.open.edit, opts('Open'))
+      vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
       -- TODO: close nvim-tree after select a file with <CR>
-      vim.keymap.set('n', 'h', api.node.navigate.parent_close, opts('Close Directory'))
-      vim.keymap.set('n', 'v', api.node.open.vertical, opts('Open: Vertical Split'))
+      vim.keymap.set("n", "h", api.node.navigate.parent_close, opts("Close Directory"))
+      vim.keymap.set("n", "v", api.node.open.vertical, opts("Open: Vertical Split"))
       --      vim.keymap.set('n', 'D', api.fs.trash, opts('Trash'))
-      vim.keymap.set('n', 'd', api.fs.remove, opts('Delete'))
+      vim.keymap.set("n", "d", api.fs.remove, opts("Delete"))
+      vim.keymap.set("n", "a", api.fs.create, opts("Create"))
     end
     ---- create on_attach  END      ---------------------------
 
     --    local tree_cb = require("nvim-tree.config").nvim_tree_callback
-    require("nvim-tree").setup {
+    require("nvim-tree").setup({
+      auto_reload_on_write = true,
       on_attach = on_attach,
       update_focused_file = {
         enable = true,
@@ -62,8 +64,8 @@ return {
         width = 30,
         side = "left",
       },
-    }
-  end
+    })
+  end,
 }
 -- Default mappings. Feel free to modify or remove as you wish.
 --
