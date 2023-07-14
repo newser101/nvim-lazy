@@ -1,11 +1,15 @@
-return{
+return {
   {
     "ellisonleao/glow.nvim",
-    config = true,
+    -- config = true,
     cmd = "Glow",
-    enabled=true,
+    enabled = true,
+
+    config = function()
+      require("glow").setup({
+        border = "shadow",
+        width=80,
+      })
+    end,
   },
-
-
-
 }

@@ -87,7 +87,7 @@ keymap("x", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(v
 
 -- markdown --
 -- Glow
-keymap("n", "<leader>g", "<cmd>Glow<CR>", opts)
+keymap("n", "md", "<cmd>Glow<CR>", opts)
 
 
 -- DAP
@@ -102,4 +102,4 @@ keymap("n", "<leader>g", "<cmd>Glow<CR>", opts)
 --keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 
 -- Lsp
--- keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opts)
+keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opts)

@@ -28,13 +28,20 @@ return {
         return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
       end
       -- You will need to insert "your code goes here" for any mappings with a custom action_cb
+
+      -- orig keymap close tree
       vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
-      -- TODO: close nvim-tree after select a file with <CR>
+      ---- close tab after select a file
+      -- vim.keymap.set("n", "<CR>", function()
+      --   api.node.open.edit()
+      --   api.tree.close()
+      -- end, opts("select"))
       vim.keymap.set("n", "h", api.node.navigate.parent_close, opts("Close Directory"))
       vim.keymap.set("n", "v", api.node.open.vertical, opts("Open: Vertical Split"))
       --      vim.keymap.set('n', 'D', api.fs.trash, opts('Trash'))
       vim.keymap.set("n", "d", api.fs.remove, opts("Delete"))
       vim.keymap.set("n", "a", api.fs.create, opts("Create"))
+     vim.keymap.set('n', 'P', api.node.navigate.parent, opts('Parent Directory'))
     end
     ---- create on_attach  END      ---------------------------
 

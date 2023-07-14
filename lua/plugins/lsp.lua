@@ -41,9 +41,11 @@ return {
       vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
       vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts)
       vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-      vim.keymap.set("n", "<space>lf", function()
-        vim.lsp.buf.format({ async = true })
-      end, opts)
+      -- vim.keymap.set("n", "<space>lf", function()
+      --   vim.lsp.buf.format()
+      --   -- vim.lsp.buf.format({ async = true })
+      -- end, opts)
+      -- vim.keymap.set("n","<leader>lf","<cmd>lua vim.lsp.buf.format({ async = true })<CR>",opts)
     end
 
     local lspconfig = require("lspconfig")

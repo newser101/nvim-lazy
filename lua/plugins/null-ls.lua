@@ -30,6 +30,9 @@ return {
 				-- shell --
 				formatting.beautysh,
 				diagnostics.shellcheck,
+        -- markdown
+        formatting.mdformat,
+        diagnostics.markdownlint,
 				-- --
 				formatting.prettier, -- CSS, Flow, HTML, JSON, JSX, JavaScript, LESS, Markdown, SCSS, TypeScript, Vue, YAML
 			},
