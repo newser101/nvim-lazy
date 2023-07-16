@@ -1,18 +1,18 @@
 return {
-  "jose-elias-alvarez/null-ls.nvim",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-  },
-  version = "*",
-  enabled = true,
+	"jose-elias-alvarez/null-ls.nvim",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+	},
+	version = "*",
+	enabled = true,
 
-  config = function()
-    local null_ls = require("null-ls")
-    local formatting = null_ls.builtins.formatting
-    local diagnostics = null_ls.builtins.diagnostics
-    local code_actions = null_ls.builtins.code_actions
-    --		local completion = null_ls.builtins.completion
-    	local hover = null_ls.builtins.hover
+	config = function()
+		local null_ls = require("null-ls")
+		local formatting = null_ls.builtins.formatting
+		local diagnostics = null_ls.builtins.diagnostics
+		local code_actions = null_ls.builtins.code_actions
+		--		local completion = null_ls.builtins.completion
+		-- local hover = null_ls.builtins.hover
 
 		null_ls.setup({
 			-- NOTE: check if needed (maybe diagnostics)
@@ -28,11 +28,14 @@ return {
 				formatting.black, -- python
 				diagnostics.flake8,
 				-- shell --
-				formatting.beautysh,
+				formatting.shfmt,
+				-- formatting.shellharden,
+				-- formatting.beautysh,
 				diagnostics.shellcheck,
-        -- markdown
-        formatting.mdformat,
-        diagnostics.markdownlint,
+        code_actions.shellcheck,
+				-- markdown
+				formatting.mdformat,
+				diagnostics.markdownlint,
 				-- --
 				formatting.prettier, -- CSS, Flow, HTML, JSON, JSX, JavaScript, LESS, Markdown, SCSS, TypeScript, Vue, YAML
 			},
