@@ -19,7 +19,6 @@ return {
   --    vim.g.neo_tree_remove_legacy_commands = 1
   --  end,
 
-
   config = function()
     --      close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
     require("neo-tree").setup({
@@ -28,18 +27,18 @@ return {
         git_status = {
           -- todo create nice symbols and/or export symbols to a file
           symbols = {
-            renamed   = "󰁕",
-            unstaged  = "✖",
-            modified  = "✖", -- or "", but this is redundant info if you use git_status_colors on the name
-            added     = "✖", -- or "✚", but this is redundant info if you use git_status_colors on the name
-            deleted   = "✖✖", -- this can only be used in the git_status source
+            renamed = "󰁕",
+            unstaged = "✖",
+            modified = "✖", -- or "", but this is redundant info if you use git_status_colors on the name
+            added = "✖", -- or "✚", but this is redundant info if you use git_status_colors on the name
+            deleted = "✖✖", -- this can only be used in the git_status source
             --             renamed   = "",-- this can only be used in the git_status source
             -- Status type
             untracked = "",
-            ignored   = "",
+            ignored = "",
             --              unstaged  = "",
-            staged    = "",
-            conflict  = "",
+            staged = "",
+            conflict = "",
           },
         },
       },
@@ -49,12 +48,11 @@ return {
       --        use_libuv_file_watcher = true,
       --      },
       --      source_selector = {
---      sources = {
---        "git_status", "filesystem",
---      },
---      --      },
+      --      sources = {
+      --        "git_status", "filesystem",
+      --      },
+      --      --      },
     })
     --    require("neo-tree.sources.git_status").refresh()
-  end
-
+  end,
 }

@@ -41,7 +41,7 @@ return {
       --      vim.keymap.set('n', 'D', api.fs.trash, opts('Trash'))
       vim.keymap.set("n", "d", api.fs.remove, opts("Delete"))
       vim.keymap.set("n", "a", api.fs.create, opts("Create"))
-     vim.keymap.set('n', 'P', api.node.navigate.parent, opts('Parent Directory'))
+      vim.keymap.set("n", "P", api.node.navigate.parent, opts("Parent Directory"))
     end
     ---- create on_attach  END      ---------------------------
 

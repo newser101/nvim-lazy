@@ -5,7 +5,7 @@ return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
   requires = {
-    "nvim-web-devicons"
+    "nvim-web-devicons",
   },
   enabled = true,
   --------------- lualine config ---------------------------
@@ -21,10 +21,10 @@ return {
       symbols = icons.diagnostic_symbols,
       diagnostics_color = {
         -- Same values as the general color option can be used here.
-        error = 'DiagnosticError', -- Changes diagnostics' error color.
-        warn  = 'DiagnosticWarn',  -- Changes diagnostics' warn color.
-        info  = 'DiagnosticInfo',  -- Changes diagnostics' info color.
-        hint  = 'DiagnosticHint',  -- Changes diagnostics' hint color.
+        error = "DiagnosticError", -- Changes diagnostics' error color.
+        warn = "DiagnosticWarn", -- Changes diagnostics' warn color.
+        info = "DiagnosticInfo", -- Changes diagnostics' info color.
+        hint = "DiagnosticHint", -- Changes diagnostics' hint color.
       },
       colored = true,
       update_in_insert = false,
@@ -41,9 +41,9 @@ return {
       cond = hide_in_width,
       diff_color = {
         -- Same color values as the general color option can be used here.
-        added    = 'DiffAdd',    -- Changes the diff's added color
-        modified = 'DiffChange', -- Changes the diff's modified color
-        removed  = 'DiffDelete', -- Changes the diff's removed color you
+        added = "DiffAdd",   -- Changes the diff's added color
+        modified = "DiffChange", -- Changes the diff's modified color
+        removed = "DiffDelete", -- Changes the diff's removed color you
       },
     }
     local spaces = function()
@@ -63,11 +63,11 @@ return {
       mode = 2,
       max_length = vim.o.columns * 2 / 3,
       filetype_names = {
-        TelescopePrompt = 'Telescope',
-        dashboard = 'Dashboard',
-        packer = 'Packer',
-        fzf = 'FZF',
-        alpha = 'Alpha'
+        TelescopePrompt = "Telescope",
+        dashboard = "Dashboard",
+        packer = "Packer",
+        fzf = "FZF",
+        alpha = "Alpha",
       },
     }
     local mode = {
@@ -75,26 +75,25 @@ return {
       icons_enabled = false,
     }
     ----------- setup lualine ---------------------
-    require('lualine').setup {
+    require("lualine").setup({
       options = {
         icons_enabled = true,
         theme = "auto",
         section_separators = { left = "", right = "" },
         component_separators = { left = "", right = "" },
-        disabled_filetypes = { "alpha", "dashboard", },
+        disabled_filetypes = { "alpha", "dashboard" },
         always_divide_middle = true,
       },
 
       sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch' },
+        lualine_a = { "mode" },
+        lualine_b = { "branch" },
         lualine_c = { diagnostics },
 
         lualine_x = { diff },
-        lualine_y = { 'filetype' },
-        lualine_z = { 'windows' }
+        lualine_y = { "filetype" },
+        lualine_z = { "windows" },
       },
-
-    }
+    })
   end,
 }

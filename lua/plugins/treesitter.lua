@@ -12,7 +12,7 @@ return {
     ts_utils.is_in_node_range = vim.treesitter.is_in_node_range
 
     require("nvim-treesitter.configs").setup({
-      ensure_installed = { "lua", "bash", "python","jsonc" },
+      ensure_installed = { "lua", "bash", "python", "jsonc" },
       ignore_installed = { "" },
       sync_installed = false,
 
@@ -26,7 +26,7 @@ return {
         disable = { "python" },
       },
 
-      autopairs=true,
+      autopairs = true,
     })
   end,
   ------ minimum setup END -------
