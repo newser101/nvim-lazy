@@ -91,6 +91,10 @@ local icons = {
     },
   },
   -- trouble END
+  
+  -- bufferline BEGINN
+  
+  -- bufferline END
   ---- restart icons END  -----
   git = {
     LineAdded = "",
