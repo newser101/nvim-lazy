@@ -23,7 +23,7 @@ local icons = {
       symlink_open = "",
     },
     icons = {
-      hint = "",
+      hint = "",
       info = "",
       warning = "",
       error = "",
