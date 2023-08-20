@@ -2,11 +2,13 @@ return {
   "lukas-reineke/indent-blankline.nvim",
 
   config = function()
-    vim.opt.list = false
+    vim.opt.list = true
     vim.opt.listchars:append("eol:↴")
     vim.keymap.set("n", "<leader>it", ":IndentBlanklineToggle<CR>", { silent = true })
+
     require("indent_blankline").setup({
       show_end_of_line = true,
+
       ----- lunarnvim settings -----
       char = "▏",
       show_trailing_blankline_indent = false,
