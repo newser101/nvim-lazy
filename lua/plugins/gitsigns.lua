@@ -7,14 +7,6 @@ return {
     local git_signs = require("config.icons").gitsigns
     require("gitsigns").setup({
       signs = git_signs,
-      --   signs = {
-      --    add          = { text = '│' },
-      --    change       = { text = '│' },
-      --    delete       = { text = '契'},
-      --    topdelete    = { text = '契' },
-      --    changedelete = { text = '~' },
-      --    untracked    = { text = '┆' },
-      -- },
       signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
       numhl = false,  -- Toggle with `:Gitsigns toggle_numhl`
       linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
