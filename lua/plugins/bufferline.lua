@@ -22,8 +22,11 @@ return {
 				max_name_length = 30,
 				max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
 				tab_size = 21,
-        -- INFO: :h bufferline-diagnostics
+        -- INFO :h bufferline-diagnostics
 				diagnostics = "nvim_lsp", -- | "nvim_lsp" | "coc" | false
+
+				persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+				always_show_bufferline = true,
 			},
 		})
 	end,
