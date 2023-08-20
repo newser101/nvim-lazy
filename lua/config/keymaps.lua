@@ -18,13 +18,14 @@ vim.g.mapleader = " "
 -- my keymaps BEGINN
 -- Normal --
 keymap("n", "<leader>p", ":exec 'w | !python3 %'<CR>", opts) --run python file
-keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", opts)    -- run bash file
-keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts)     -- run lua file
-keymap("n", "<leader>w", ":exec 'w' <CR>", opts)             -- save file
-keymap("n", "<leader>q", ":exec 'q' <CR>", opts)             -- quit file
+keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", opts) -- run bash file
+keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts) -- run lua file
+keymap("n", "<leader>w", ":exec 'w' <CR>", opts) -- save file
+keymap("n", "<leader>q", ":exec 'q' <CR>", opts) -- quit file
 -- my keymaps END
 
 -- Normal --
+-- TODO add keymaps to split window
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
@@ -89,7 +90,6 @@ keymap("x", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(v
 -- Glow
 keymap("n", "md", "<cmd>Glow<CR>", opts)
 
-
 -- DAP
 --keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
 --keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
@@ -100,6 +100,3 @@ keymap("n", "md", "<cmd>Glow<CR>", opts)
 --keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
 --keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 --keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
-
--- Lsp
-keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opts)
