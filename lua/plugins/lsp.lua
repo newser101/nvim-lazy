@@ -8,7 +8,7 @@ return {
     { "folke/neodev.nvim",  opts = {} },
     "hrsh7th/cmp-nvim-lsp",
   },
-  enabled = true,
+  -- enabled = true,
 
   config = function()
     ---- global kemaps
