@@ -18,10 +18,10 @@ vim.g.mapleader = " "
 -- my keymaps BEGINN
 -- Normal --
 keymap("n", "<leader>p", ":exec 'w | !python3 %'<CR>", opts) --run python file
-keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", opts)    -- run bash file
-keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts)     -- run lua file
-keymap("n", "<leader>w", ":exec 'w' <CR>", opts)             -- save file
-keymap("n", "<leader>q", ":exec 'q' <CR>", opts)             -- quit file
+keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", opts) -- run bash file
+keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts) -- run lua file
+keymap("n", "<leader>w", ":exec 'w' <CR>", opts) -- save file
+keymap("n", "<leader>q", ":exec 'q' <CR>", opts) -- quit file
 -- my keymaps END
 
 -- Normal --
@@ -93,6 +93,9 @@ keymap("n", "md", "<cmd>Glow<CR>", opts)
 -- illuminate
 keymap("n", "<a-n>", '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', opts)
 keymap("n", "<a-p>", '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', opts)
+
+-- indentblanklines
+keymap("n", "<leader>it", ":IndentBlanklineToggle<CR>", { silent = true })
 
 -- DAP
 --keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
