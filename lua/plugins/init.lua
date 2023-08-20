@@ -1,14 +1,14 @@
 return {
   "famiu/bufdelete.nvim",
-  "nvim-lua/plenary.nvim",
-  version="*",
   "BurntSushi/ripgrep",
+
   {
-    "RRethy/vim-illuminate",
-    event = "VeryLazy",
+    "nvim-lua/plenary.nvim",
+    version = "*",
   },
+
   {
-    'akinsho/toggleterm.nvim',
+    "akinsho/toggleterm.nvim",
     event = "VeryLazy",
     config = function()
       --
@@ -27,7 +27,6 @@ return {
         float_opts = {
           border = "curved",
         },
-
       })
       -- todo make keymaps work
       --      -- keymap --
@@ -48,15 +47,20 @@ return {
       --vim.cmd('autocmd! TermOpen term://*toggleterm#* set_terminal_keymaps()')
       ---- keymap END --
 
-      local Terminal = require('toggleterm.terminal').Terminal
-      local lazygit  = Terminal:new({ cmd = "lazygit", hidden = true })
+      local Terminal = require("toggleterm.terminal").Terminal
+      local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
 
       function lazygit_toggle()
         lazygit:toggle()
       end
 
-      vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua lazygit_toggle()<CR>", { noremap = true, silent = true })
-    end
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>gg",
+        "<cmd>lua lazygit_toggle()<CR>",
+        { noremap = true, silent = true }
+      )
+    end,
   },
 
   {
