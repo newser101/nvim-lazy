@@ -1,6 +1,7 @@
 -- eventually use navic for statusline
 -- https://alpha2phi.medium.com/neovim-for-beginners-status-line-dd0c97fba978
 -- https://github.com/SmiteshP/nvim-navic
+-- TODO: cleanup
 return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
@@ -8,6 +9,7 @@ return {
     "nvim-web-devicons",
   },
   enabled = true,
+
   --------------- lualine config ---------------------------
   config = function()
     --- link to icons --
@@ -74,6 +76,7 @@ return {
       "mode",
       icons_enabled = false,
     }
+
     ----------- setup lualine ---------------------
     require("lualine").setup({
       options = {
