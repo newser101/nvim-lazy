@@ -18,10 +18,10 @@ vim.g.mapleader = " "
 -- my keymaps BEGINN
 -- Normal --
 keymap("n", "<leader>p", ":exec 'w | !python3 %'<CR>", opts) --run python file
-keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", opts) -- run bash file
-keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts) -- run lua file
-keymap("n", "<leader>w", ":exec 'w' <CR>", opts) -- save file
-keymap("n", "<leader>q", ":exec 'q' <CR>", opts) -- quit file
+keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", opts)    -- run bash file
+keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts)     -- run lua file
+keymap("n", "<leader>w", ":exec 'w' <CR>", opts)             -- save file
+keymap("n", "<leader>q", ":exec 'q' <CR>", opts)             -- quit file
 -- my keymaps END
 
 -- Normal --
@@ -71,7 +71,7 @@ keymap("v", ">", ">gv", opts)
 -- Plugins --
 
 -- NvimTree
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>",{silent = true, remap = false, desc = "NvimTreeToggle"} )
+keymap("n", "<leader>e", ":NvimTreeToggle<CR>", { silent = true, remap = false, desc = "NvimTreeToggle" })
 
 -- Telescope
 keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
@@ -96,6 +96,13 @@ keymap("n", "<a-p>", '<cmd>lua require"illuminate".next_reference{reverse=true,w
 
 -- indentblanklines
 keymap("n", "<leader>it", ":IndentBlanklineToggle<CR>", { silent = true })
+
+-- folke/todocomments
+keymap("n", "<leader>st", "<cmd>TodoTelescope<cr>", { desc = "Todo" })
+keymap("n", "<leader>sl", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", {desc = "Todo/Fix/Fixme"} )
+keymap("n", "<leader>sr", "<cmd>TodoTrouble<cr>", {desc = "TodoTrouble"} )
+keymap("n", "<leader>sq", "<cmd>TodoQuickFix<cr>", {desc = "TodoTrouble"} )
+
 
 -- DAP
 --keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
