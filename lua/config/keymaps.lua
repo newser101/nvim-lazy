@@ -99,10 +99,9 @@ keymap("n", "<leader>it", ":IndentBlanklineToggle<CR>", { silent = true })
 
 -- folke/todocomments
 keymap("n", "<leader>st", "<cmd>TodoTelescope<cr>", { desc = "Todo" })
-keymap("n", "<leader>sl", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", {desc = "Todo/Fix/Fixme"} )
-keymap("n", "<leader>sr", "<cmd>TodoTrouble<cr>", {desc = "TodoTrouble"} )
-keymap("n", "<leader>sq", "<cmd>TodoQuickFix<cr>", {desc = "TodoTrouble"} )
-
+keymap("n", "<leader>sl", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", { desc = "Todo/Fix/Fixme" })
+keymap("n", "<leader>sr", "<cmd>TodoTrouble<cr>", { desc = "TodoTrouble" })
+keymap("n", "<leader>sq", "<cmd>TodoQuickFix<cr>", { desc = "TodoTrouble" })
 
 -- DAP
 --keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)

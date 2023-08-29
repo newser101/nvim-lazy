@@ -1,10 +1,7 @@
 -- https://github.com/loctvl842/nvim/blob/master/lua/tvl/core/resources/editor.lua
 return {
   "nvim-telescope/telescope.nvim",
-  -- version=false,
-  --    'nvim-telescope/telescope.nvim', tag = '0.1.1',
   branch = "0.1.x",
-  --    lazy=true,
   dependencies = {
     "nvim-lua/plenary.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -23,13 +20,14 @@ return {
             ["<C-j>"] = actions.move_selection_next,
           },
         },
-        -- theme="dropdown",
       },
+
       pickers = {
         find_files = {
           theme = "dropdown",
         },
       },
+
       extensions = {
         fzf = {
           fuzzy = true,              -- false will only do exact matching

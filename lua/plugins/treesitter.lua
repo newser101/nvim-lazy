@@ -7,7 +7,7 @@ return {
   enabled = true,
   ------ minimum setup BEGINN -------
   config = function()
-    --- FIX: the message: nvim-treesitter.ts_utils.is_in_node_range is deprecated: use vim.treesitter.is_in_node_range
+    -- FIX: the message: nvim-treesitter.ts_utils.is_in_node_range is deprecated: use vim.treesitter.is_in_node_range
     local ts_utils = require("nvim-treesitter.ts_utils")
     ts_utils.is_in_node_range = vim.treesitter.is_in_node_range
 
