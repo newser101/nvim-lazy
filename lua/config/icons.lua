@@ -40,9 +40,15 @@ local icons = {
       hint = " ",
     },
     diff = {
-      added = " ",
-      modified = " ",
-      removed = " ",
+      -- added = " ",
+      -- added = "  ",
+      added = " ",
+      -- modified = " ",
+      -- modified = "󰿡 󰯍 󰿢 ",
+      modified = "󰯍 ",
+      -- removed = " ",
+      -- removed = " 󱘹 󰗨",
+      removed = "󱘹 ",
     },
   },
   -- lualine END --
