@@ -146,6 +146,8 @@ return {
         lualine_y = {},
         lualine_z = {},
       },
+      -- extensions = { "fugitive" },
+      -- extensions = {'quickfix'}
     })
   end,
 }
