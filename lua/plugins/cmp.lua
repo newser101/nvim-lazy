@@ -2,6 +2,7 @@ return {
   "hrsh7th/nvim-cmp",
   version = "*", -- last release is way too old
   -- event = "InsertEnter",
+  event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     "neovim/nvim-lspconfig",
     "hrsh7th/cmp-nvim-lsp",
@@ -9,7 +10,8 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
     "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-nvim-lua", -- TODO: if needed
+    "hrsh7th/cmp-nvim-lua",
+
     -- For luasnip users.
     "saadparwaiz1/cmp_luasnip",
     {
@@ -19,10 +21,7 @@ return {
       },
     },
   },
-  --  enabled = true,
-  -- TODO: check best event={}
-  event = { "InsertEnter", "CmdlineEnter" },
-
+  enabled = true,
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
@@ -44,6 +43,7 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
+
       ---- Disable completion in Comments
       enabled = function()
         local context = require("cmp.config.context")
@@ -54,6 +54,7 @@ return {
           return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
         end
       end,
+
       ---- SuperTAB ----
       mapping = cmp.mapping.preset.insert({
         ["<C-k>"] = cmp.mapping.select_prev_item(),
@@ -68,6 +69,7 @@ return {
         -- Accept currently selected item. If none selected, `select` first item.
         -- Set `select` to `false` to only confirm explicitly selected items.
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
+
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
@@ -97,8 +99,10 @@ return {
           "s",
         }),
       }),
+
       formatting = {
         fields = { "abbr", "kind", "menu" },
+
         format = function(entry, vim_item)
           -- Kind icons
           local kind_icons = require("config.icons").cmp.kind_icons
@@ -114,6 +118,7 @@ return {
           return vim_item
         end,
       },
+
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "luasnip" },
@@ -121,10 +126,12 @@ return {
         { name = "buffer" },
         { name = "path" },
       }),
+
       window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       },
+
       experimental = {
         ghost_text = true,
       },

@@ -22,6 +22,7 @@ keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", opts)    -- run bash file
 keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts)     -- run lua file
 keymap("n", "<leader>w", ":exec 'w' <CR>", opts)             -- save file
 keymap("n", "<leader>q", ":exec 'q' <CR>", opts)             -- quit file
+keymap("i", "<leader>l", "C-Left", opts)                     -- jump next
 -- my keymaps END
 
 -- Normal --
