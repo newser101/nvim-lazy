@@ -24,7 +24,8 @@ keymap("n", "<leader>w", ":exec 'w' <CR>", opts)             -- save file
 keymap("n", "<leader>q", ":exec 'q' <CR>", opts)             -- quit file
 -- keymap("i", "<leader>l", "<C-Right>", opts)                     -- jump next
 -- split windows
-keymap("n", "<leader>sd", "<C-W>v", opts, { desc = "split vertical" })
+-- keymap("n", "<leader>sd", "<C-W>v", opts, { desc = "split vertical" })
+keymap("n", "<leader>sd", "<C-W>v", { noremap = true, silent = true, desc = "split vertical" })
 keymap("n", "<leader>sf", "<C-W>s", opts, { desc = "split horizontal" })
 -- my keymaps ENj
 
