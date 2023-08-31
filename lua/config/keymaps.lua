@@ -22,11 +22,13 @@ keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", opts)    -- run bash file
 keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts)     -- run lua file
 keymap("n", "<leader>w", ":exec 'w' <CR>", opts)             -- save file
 keymap("n", "<leader>q", ":exec 'q' <CR>", opts)             -- quit file
-keymap("i", "<leader>l", "C-Left", opts)                     -- jump next
--- my keymaps END
+-- keymap("i", "<leader>l", "<C-Right>", opts)                     -- jump next
+-- split windows
+keymap("n", "<leader>sd", "<C-W>v", opts, { desc = "split vertical" })
+keymap("n", "<leader>sf", "<C-W>s", opts, { desc = "split horizontal" })
+-- my keymaps ENj
 
 -- Normal --
--- TODO add keymaps to split window
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
