@@ -99,7 +99,7 @@ keymap(
   "x",
   "<leader>/",
   "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-  new_opts("Comment")
+  new_opts("Blockcomment")
 )
 
 -- markdown --
@@ -111,7 +111,7 @@ keymap("n", "<a-n>", '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>
 keymap("n", "<a-p>", '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', opts)
 
 -- indentblanklines
-keymap("n", "<leader>it", ":IndentBlanklineToggle<CR>", { silent = true })
+keymap("n", "<leader>it", ":IndentBlanklineToggle<CR>", new_opts("toggle blank lines"))
 
 -- folke/todocomments
 keymap("n", "<leader>st", "<cmd>TodoTelescope<cr>", new_opts("Telescope Todo"))
