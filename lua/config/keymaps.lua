@@ -7,6 +7,13 @@ local opts = { noremap = true, silent = true }
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 
+-- function to add desc to opts
+local function new_opts(text)
+  local newtable = { noremap = true, silent = true }
+  newtable.desc = text
+  return newtable
+end
+
 -- Modes
 --   normal_mode = "n",
 --   insert_mode = "i",
@@ -17,24 +24,24 @@ vim.g.mapleader = " "
 
 -- my keymaps BEGINN
 -- Normal --
-keymap("n", "<leader>p", ":exec 'w | !python3 %'<CR>", opts) --run python file
-keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", opts)    -- run bash file
-keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts)     -- run lua file
-keymap("n", "<leader>w", ":exec 'w' <CR>", opts)             -- save file
-keymap("n", "<leader>q", ":exec 'q' <CR>", opts)             -- quit file
+keymap("n", "<leader>p", ":exec 'w | !python3 %'<CR>", new_opts("run pythonfile")) --run python file
+keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", opts)                          -- run bash file
+keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts)                           -- run lua file
+keymap("n", "<leader>w", ":exec 'w' <CR>", opts)                                   -- save file
+keymap("n", "<leader>q", ":exec 'q' <CR>", opts)                                   -- quit file
 -- keymap("i", "<leader>l", "<C-Right>", opts)                     -- jump next
 -- split windows
 -- keymap("n", "<leader>sd", "<C-W>v", opts, { desc = "split vertical" })
-keymap("n", "<leader>sd", "<C-W>v", { noremap = true, silent = true, desc = "split vertical" })
-keymap("n", "<leader>sf", "<C-W>s", opts, { desc = "split horizontal" })
+keymap("n", "<leader>sd", "<C-W>v", new_opts("split vertical"))
+keymap("n", "<leader>sf", "<C-W>s", new_opts("split horizontal"))
 -- my keymaps ENj
 
 -- Normal --
 -- Better window navigation
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+keymap("n", "<C-h>", "<C-w>h", new_opts("window left"))
+keymap("n", "<C-j>", "<C-w>j", new_opts("window down"))
+keymap("n", "<C-k>", "<C-w>k", new_opts("window up"))
+keymap("n", "<C-l>", "<C-w>l", new_opts("window right"))
 
 -- Move Lines
 keymap("n", "<A-j>", ":m .+1<CR>==")
@@ -55,7 +62,7 @@ keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- Clear highlights
-keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
+keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", new_opts("clear highlights"))
 
 -- Close buffers
 keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
@@ -75,24 +82,29 @@ keymap("v", ">", ">gv", opts)
 -- Plugins --
 
 -- NvimTree
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>", { silent = true, remap = false, desc = "NvimTreeToggle" })
+keymap("n", "<leader>e", ":NvimTreeToggle<CR>", new_opts("NvimTreeToggle"))
 
 -- Telescope
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
-keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
-keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
+keymap("n", "<leader>ff", ":Telescope find_files<CR>", new_opts("find files"))
+keymap("n", "<leader>fg", ":Telescope live_grep<CR>", new_opts("live grep"))
+keymap("n", "<leader>fp", ":Telescope projects<CR>", new_opts("projects"))
+keymap("n", "<leader>fb", ":Telescope buffers<CR>", new_opts("buffers"))
 
 -- Git
 -- keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
 
 -- Comment
-keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
-keymap("x", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>", opts)
+keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", new_opts("Comment"))
+keymap(
+  "x",
+  "<leader>/",
+  "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+  new_opts("Comment")
+)
 
 -- markdown --
 -- Glow
-keymap("n", "md", "<cmd>Glow<CR>", opts)
+keymap("n", "md", "<cmd>Glow<CR>", new_opts("markdown Glow"))
 
 -- illuminate
 keymap("n", "<a-n>", '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', opts)
@@ -102,10 +114,10 @@ keymap("n", "<a-p>", '<cmd>lua require"illuminate".next_reference{reverse=true,w
 keymap("n", "<leader>it", ":IndentBlanklineToggle<CR>", { silent = true })
 
 -- folke/todocomments
-keymap("n", "<leader>st", "<cmd>TodoTelescope<cr>", { desc = "Todo" })
-keymap("n", "<leader>sl", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", { desc = "Todo/Fix/Fixme" })
-keymap("n", "<leader>sr", "<cmd>TodoTrouble<cr>", { desc = "TodoTrouble" })
-keymap("n", "<leader>sq", "<cmd>TodoQuickFix<cr>", { desc = "TodoTrouble" })
+keymap("n", "<leader>st", "<cmd>TodoTelescope<cr>", new_opts("Telescope Todo"))
+keymap("n", "<leader>sl", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", new_opts("Todo/Fix/Fixme"))
+keymap("n", "<leader>sr", "<cmd>TodoTrouble<cr>", new_opts("TodoTrouble"))
+keymap("n", "<leader>sq", "<cmd>TodoQuickFix<cr>", new_opts("Qickfix"))
 
 -- DAP
 --keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
