@@ -8,11 +8,11 @@ return {
     { "folke/neodev.nvim",  opts = {} },
     "hrsh7th/cmp-nvim-lsp",
   },
-  enabled = true,
+  enabled = false,
 
   config = function()
     ---- global kemaps
-    -- h: vim.diagnostic
+    -- -- h: vim.diagnostic
     -- TODO: maybe rethink of better/handy/logic keymaps lhs definition
     vim.keymap.set("n", "gl", vim.diagnostic.open_float)
     vim.keymap.set("n", "<leader>lk", vim.diagnostic.goto_prev)
@@ -20,8 +20,6 @@ return {
     vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist)
 
     --  capabilities supported by nvim-cmp
-    --  show  handlers:
-    --  :lua vim.print(vim.tbl_keys(vim.lsp.handlers))
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true

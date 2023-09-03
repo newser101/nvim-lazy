@@ -25,16 +25,17 @@ end
 -- my keymaps BEGINN
 -- Normal --
 keymap("n", "<leader>p", ":exec 'w | !python3 %'<CR>", new_opts("run pythonfile")) --run python file
-keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", opts)                          -- run bash file
-keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", opts)                           -- run lua file
+keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", new_opts("run bash file"))     -- run bash file
+keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", new_opts("run lua file"))       -- run lua file
 keymap("n", "<leader>w", ":exec 'w' <CR>", opts)                                   -- save file
 keymap("n", "<leader>q", ":exec 'q' <CR>", opts)                                   -- quit file
--- keymap("i", "<leader>l", "<C-Right>", opts)                     -- jump next
+
+keymap("i", "<leader>l", "<C-Right>", new_opts("jump out"))                        -- jump next
+
 -- split windows
--- keymap("n", "<leader>sd", "<C-W>v", opts, { desc = "split vertical" })
 keymap("n", "<leader>sd", "<C-W>v", new_opts("split vertical"))
 keymap("n", "<leader>sf", "<C-W>s", new_opts("split horizontal"))
--- my keymaps ENj
+-- my keymaps END
 
 -- Normal --
 -- Better window navigation
@@ -91,7 +92,7 @@ keymap("n", "<leader>fp", ":Telescope projects<CR>", new_opts("projects"))
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", new_opts("buffers"))
 
 -- Git
--- keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
+keymap("n", "<leader>gg", "<cmd>lua lazygit_toggle()<CR>", new_opts("lazygit"))
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", new_opts("Comment"))
@@ -118,6 +119,12 @@ keymap("n", "<leader>st", "<cmd>TodoTelescope<cr>", new_opts("Telescope Todo"))
 keymap("n", "<leader>sl", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", new_opts("Todo/Fix/Fixme"))
 keymap("n", "<leader>sr", "<cmd>TodoTrouble<cr>", new_opts("TodoTrouble"))
 keymap("n", "<leader>sq", "<cmd>TodoQuickFix<cr>", new_opts("Qickfix"))
+
+-- lsp global diagnostic
+-- keymap("n", "gl", vim.diagnostic.open_float)
+-- keymap("n", "<leader>lk", vim.diagnostic.goto_prev)
+-- keymap("n", "<leader>lj", vim.diagnostic.goto_next)
+-- keymap("n", "<leader>ll", vim.diagnostic.setloclist)
 
 -- DAP
 --keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
