@@ -1,4 +1,9 @@
 return {
+-- The line:
+-- client.config.settings = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+-- should be
+-- client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+
   settings = {
     Lua = {
       runtime = {

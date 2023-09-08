@@ -31,6 +31,7 @@ return {
     local function lsp_keymaps(bufnr) -- to test
       local opts = { noremap = true, silent = true, buffer = bufnr, desc = "lsp" }
       vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+      -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
       vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
       vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
@@ -53,6 +54,7 @@ return {
     local lspconfig = require("lspconfig")
     local servers = require("lsp.lspserver")
     local on_attach = function(client, bufnr)
+      -- vim.print(client)
       lsp_keymaps(bufnr)
       -- NOTE:check illuminate
       require("illuminate").on_attach(client)
