@@ -5,7 +5,7 @@
 return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
-  requires = {
+  dependencies = {
     "nvim-web-devicons",
   },
   enabled = true,
