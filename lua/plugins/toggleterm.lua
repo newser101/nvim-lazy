@@ -21,9 +21,20 @@ return {
 
     local Terminal = require("toggleterm.terminal").Terminal
     local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+    local pythonrunfile = Terminal:new({ cmd = "python %", hidden = true })
 
     function Lazygit_toggle()
       lazygit:toggle()
+    end
+
+    function Runpythonfile_toggle()
+      pythonrunfile:toggle()
+    end
+
+    local python = Terminal:new({ cmd = "python3", hidden = true })
+
+    function _PYTHON_TOGGLE()
+      python:toggle()
     end
 
     vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua Lazygit_toggle()<CR>", { noremap = true, silent = true })
