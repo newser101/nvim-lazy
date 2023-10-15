@@ -24,12 +24,12 @@ return {
     local pythonrunfile = Terminal:new({ cmd = "python %", hidden = true })
     local python = Terminal:new({ cmd = "python3 %", noremap = true, hidden = true })
 
-    local run = Terminal:new({
-      cmd = "python3.9 " .. name,
-      hidden = true,
-      direction = float,
-      close_on_exit = false,
-    })
+    -- local run = Terminal:new({
+    --   cmd = "python3.9 " .. name,
+    --   hidden = true,
+    --   direction = float,
+    --   close_on_exit = false,
+    -- })
 
     function Lazygit_toggle()
       lazygit:toggle()
@@ -47,6 +47,17 @@ return {
     function Test_toggle()
       local name = vim.api.nvim_buf_get_name(0)
       print("python3 " .. name)
+    end
+
+    function Test_toggle2()
+      local name = vim.api.nvim_buf_get_name(0)
+      local run = Terminal:new({
+        cmd = "python3 " .. name,
+        hidden = true,
+        direction = float,
+        close_on_exit = false,
+      })
+      run:toggle()
     end
 
     vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua Lazygit_toggle()<CR>", { noremap = true, silent = true })
