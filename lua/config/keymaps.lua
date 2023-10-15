@@ -24,9 +24,7 @@ end
 
 -- my keymaps BEGINN
 -- Normal --
-keymap("n", "<leader>p", "<cmd>!python3.9 %<CR>", new_opts("run pythonfile")) --run python file
--- keymap("n", "<leader>p", ":exec 'w | !python3.9 %'<CR>", new_opts("run pythonfile")) --run python file
--- keymap("n", "<leader>p", ":exec 'w | !python3 %'<CR>", opts)                   --run python file
+keymap("n", "<leader>p", ":exec 'w | !python3 %'<CR>", opts)                   --run python file
 keymap("n", "<leader>b", ":exec 'w | !bash %'<CR>", new_opts("run bash file")) -- run bash file
 keymap("n", "<leader>l", ":exec 'w | !lua %'<CR>", new_opts("run lua file"))   -- run lua file
 keymap("n", "<leader>w", ":exec 'w' <CR>", opts)                               -- save file
