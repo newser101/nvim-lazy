@@ -41,3 +41,4 @@ luac.out
 
 lazy-lock.json
 test*
+*.py
