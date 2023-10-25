@@ -1,5 +1,6 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
+  version="2.*",
 
   config = function()
     vim.opt.list = true
@@ -10,6 +11,7 @@ return {
 
       ----- lunarnvim settings -----
       char = "▏",
+      -- char = "▏",
       show_trailing_blankline_indent = false,
       show_first_indent_level = true,
       use_treesitter = true,
