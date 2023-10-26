@@ -33,8 +33,8 @@ keymap("n", "<leader>q", ":exec 'q' <CR>", opts)                               -
 keymap("i", "<leader>l", "<C-Right>", new_opts("jump out"))                    -- jump next
 
 -- split windows
-keymap("n", "<leader>sd", "<C-W>v", new_opts("split vertical"))
-keymap("n", "<leader>sf", "<C-W>s", new_opts("split horizontal"))
+keymap("n", "<leader>sv", "<C-W>v", new_opts("split vertical"))
+keymap("n", "<leader>sh", "<C-W>s", new_opts("split horizontal"))
 -- my keymaps END
 
 -- Normal --
@@ -112,7 +112,7 @@ keymap("n", "<a-n>", '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>
 keymap("n", "<a-p>", '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', opts)
 
 -- indentblanklines
-keymap("n", "<leader>it", ":IndentBlanklineToggle<CR>", new_opts("toggle blank lines"))
+keymap("n", "<leader>it", ":IBLToggle<CR>", new_opts("toggle blank lines"))
 
 -- folke/todocomments
 keymap("n", "<leader>st", "<cmd>TodoTelescope<cr>", new_opts("Telescope Todo"))

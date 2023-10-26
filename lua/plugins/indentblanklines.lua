@@ -1,25 +1,34 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
+  main = "ibl",
 
-  config = function()
-    vim.opt.list = true
-    vim.opt.listchars:append("eol:↴")
-
-    require("indent_blankline").setup({
-      show_end_of_line = true,
-
-      ----- lunarnvim settings -----
-      char = "▏",
-      show_trailing_blankline_indent = false,
-      show_first_indent_level = true,
-      use_treesitter = true,
-      show_current_context = true,
-      buftype_exclude = { "terminal", "nofile" },
-      filetype_exclude = {
-        "help",
-        "packer",
-        "NvimTree",
-      },
-    })
-  end,
+  opts = {
+    indent = {
+      char = "│",
+      -- char = "┃",
+      -- char ="│",
+      -- char = "",
+      -- tab_char = "│",
+      -- highlight = highlight,
+      -- highlight = { "Function" },
+      -- highlight = { "Function", "Label" },
+    },
+    scope = {
+      enabled = false,
+      -- highlight = { "Function","Label" },
+      -- highlight = highlight,
+    },
+    -- exclude = {
+    --   filetypes = {
+    --     "neo-tree",
+    --     "Trouble",
+    --     "trouble",
+    --     "lazy",
+    --     "mason",
+    --     "Nvimtree",
+    --     "toggleterm",
+    --     "lazyterm",
+    --   },
+    -- },
+  },
 }
