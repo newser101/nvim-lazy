@@ -29,8 +29,8 @@ return {
         -- code_actions=refactoring,
 
         -- python --
-        -- formatting.black,
-        formatting.blue,
+        formatting.black,
+        -- formatting.blue,
         -- diagnostics.flake8,
         diagnostics.pylint,
         -- diagnostics.mypy,
