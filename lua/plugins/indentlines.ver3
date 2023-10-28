@@ -1,0 +1,29 @@
+return {
+  "lukas-reineke/indent-blankline.nvim",
+  main = "ibl",
+  enabled = true,
+
+  config = function()
+    require("ibl").setup({
+
+      -- indent = {
+        -- char = "│",
+        -- char = "┃",
+        -- char = "│",
+        -- char = "",
+        -- char = "+",
+        -- tab_char = "│",
+        -- highlight = highlight,
+        -- highlight = { "Function" },
+        -- highlight = { "Function", highlight },
+        -- highlight = { "Function", "Label" },
+      -- },
+      -- scope = {
+        -- enabled = false,
+        -- highlight = { "Function","Label" },
+        -- highlight = { "Function" },
+        -- highlight = highlight,
+      -- },
+    })
+  end,
+}
