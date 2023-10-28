@@ -7,11 +7,11 @@ luac.out
 *.tar.gz
 
 # Object files
-*.o
-*.os
-*.ko
-*.obj
-*.elf
+# *.o
+# *.os
+# *.ko
+# *.obj
+# *.elf
 
 # Precompiled Headers
 *.gch
@@ -39,6 +39,8 @@ luac.out
 *.x86_64
 *.hex
 
+# my ignorelist
 lazy-lock.json
 test*
 *.py
+*.bak
