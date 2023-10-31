@@ -21,7 +21,7 @@ return {
       },
     },
   },
-  enabled = true,
+  -- enabled = true,
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
