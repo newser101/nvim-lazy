@@ -35,6 +35,10 @@ keymap("i", "<leader>l", "<C-Right>", new_opts("jump out"))                    -
 -- split windows
 keymap("n", "<leader>sv", "<C-W>v", new_opts("split vertical"))
 keymap("n", "<leader>sh", "<C-W>s", new_opts("split horizontal"))
+
+-- disable recording:
+keymap("n", "q", "<Nop>", opts)
+
 -- my keymaps END
 
 -- Normal --
