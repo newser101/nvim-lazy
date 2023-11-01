@@ -1,5 +1,5 @@
+-- https://blog.codeminer42.com/configuring-language-server-protocol-in-neovim/
 return {
-
   "neovim/nvim-lspconfig",
   -- lazy = true,
   event = { "BufReadPre", "BufNewFile" },
@@ -8,64 +8,72 @@ return {
     -- from Lazyvim
     { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
     { "folke/neodev.nvim",  opts = {} },
-    -- "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-nvim-lsp",
   },
   -- enabled = true,
 
   config = function()
+    ---- global kemaps
+    -- h: vim.diagnostic
     -- TODO: maybe rethink of better/handy/logic keymaps lhs definition
-    -- global keymaps
     vim.keymap.set("n", "gl", vim.diagnostic.open_float)
     vim.keymap.set("n", "<leader>lk", vim.diagnostic.goto_prev)
     vim.keymap.set("n", "<leader>lj", vim.diagnostic.goto_next)
     vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist)
 
-    -- TODO: capabilities supported by nvim-cmp
-    -- TODO: add local keymaps
-    -- TODO: https://github.com/neovim/nvim-lspconfig/wiki/Language-specific-plugins
+    --  capabilities supported by nvim-cmp
+    --  show  handlers:
+    --  :lua vim.print(vim.tbl_keys(vim.lsp.handlers))
+    local cmp_nvim_lsp = require("cmp_nvim_lsp")
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+
+    -- local Keymaps to parse to lsp setup
+    local function lsp_keymaps(bufnr) -- to test
+      local opts = { noremap = true, silent = true, buffer = bufnr, desc = "lsp" }
+      vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+      -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
+      vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+      vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+      vim.keymap.set("n", "<leader>ls", vim.lsp.buf.signature_help, opts)
+      -- TODO: check if workspace is needed
+      --      vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+      --      vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+      --      vim.keymap.set('n', '<space>wl', function()
+      --        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+      --      end, opts)
+      vim.keymap.set("n", "<leader>ld", vim.lsp.buf.type_definition, opts)
+      vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+      vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { noremap = true, buffer = bufnr }) -- no silent
+      vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+      vim.keymap.set("n", "<leader>lf", function()
+        vim.lsp.buf.format({ async = true })
+      end, opts)
+    end
 
     local lspconfig = require("lspconfig")
-    -- list of language servers
     local servers = require("lsp.lspserver")
+    local on_attach = function(client, bufnr)
+      -- vim.print(client)
+      lsp_keymaps(bufnr)
+      -- NOTE:check illuminate
+      require("illuminate").on_attach(client)
+    end
 
+    for _, server in pairs(servers) do
+      Opts = {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
+      server = vim.split(server, "@")[1]
 
-
-    -- lspconfig.pyright.setup {}  -- connest to server
-    require("lspconfig").pyright.setup({
-      on_attach = function()
-        print("pyright attached")
-        vim.keymap.set("n", "K", vim.lsp.buf.hover(), { buffer = 0 })
-      end,
-    }) -- connect to server
-    require("lspconfig").lua_ls.setup({
-      settings = {
-        Lua = {
-          runtime = {
-            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-            version = "LuaJIT",
-          },
-          diagnostics = {
-            -- Get the language server to recognize the `vim` global
-            globals = { "vim" },
-          },
-          workspace = { -- NOTE: need for 'luv' bug
-            checkThirdParty = false,
-            -- Make the server aware of Neovim runtime files
-            library = vim.api.nvim_get_runtime_file("", true),
-          },
-          completion = {
-            callSnippet = "Replace",
-          },
-          telemetry = {
-            enable = false,
-          },
-        },
-      },
-
-      on_attach = function()
-        print("lua attached")
-        vim.keymap.set("n", "K", vim.lsp.buf.hover(), { buffer = 0 })
-      end,
-    }) -- connect to server
+      local require_ok, conf_opts = pcall(require, "lsp." .. server)
+      if require_ok then
+        Opts = vim.tbl_deep_extend("force", conf_opts, Opts)
+      end
+      lspconfig[server].setup(Opts)
+    end
   end,
 }
