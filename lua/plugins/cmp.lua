@@ -16,7 +16,7 @@ return {
     -- "hrsh7th/cmp-cmdline",
     -- "hrsh7th/cmp-nvim-lua",
   },
-  enabled = true,
+  -- enabled = true,
 
   config = function()
     local cmp = require("cmp")
