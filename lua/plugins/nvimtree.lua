@@ -41,6 +41,9 @@ return {
 				width = 30,
 				side = "left",
 			},
+			git = {
+				ignore = false,
+			  },
 		})
 	end,
 }
