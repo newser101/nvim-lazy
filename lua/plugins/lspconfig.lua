@@ -11,6 +11,9 @@ return {
     "hrsh7th/cmp-nvim-lsp",
   },
   -- enabled = true,
+  --
+  -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization
+  -- https://github.com/LunarVim/Launch.nvim/blob/master/lua/user/lspconfig.lua
 
   config = function()
     ---- global kemaps
@@ -20,7 +23,6 @@ return {
     vim.keymap.set("n", "<leader>lk", vim.diagnostic.goto_prev)
     vim.keymap.set("n", "<leader>lj", vim.diagnostic.goto_next)
     vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist)
-    print("hello")
 
     --  capabilities supported by nvim-cmp
     --  show  handlers:
@@ -32,16 +34,17 @@ return {
 
     -- local Keymaps to parse to lsp setup
     local function lsp_keymaps(bufnr) -- to test
-      local opts = { noremap = true, silent = true, buffer = bufnr, desc = "lsp" }
-      -- local opts = { noremap = true, silent = true }
+      -- local opts = { noremap = true, silent = true, buffer = bufnr, desc = "lsp" }
+      local opts = { noremap = true, silent = true }
       -- set buffer local mapping
       local keymap = vim.api.nvim_buf_set_keymap
       -- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- orig
-      keymap(buffer,"n", "gD", vim.lsp.buf.declaration, opts)
-      keymap(buffer,"n", "gd", vim.lsp.buf.definition, opts)
-      keymap(buffer,"n", "K", vim.lsp.buf.hover, opts)
-      keymap(buffer,"n", "gi", vim.lsp.buf.implementation, opts)
-      keymap(buffer,"n", "<leader>ls", vim.lsp.buf.signature_help, opts)
+      keymap(bufnr,"n", "gD", vim.lsp.buf.declaration, opts)
+      keymap(bufnr,"n", "gd", vim.lsp.buf.definition, opts)
+      -- keymap(bufnr,"n", "K", vim.lsp.buf.hover, opts)
+      keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+      keymap(bufnr,"n", "gi", vim.lsp.buf.implementation, opts)
+      keymap(bufnr,"n", "<leader>ls", vim.lsp.buf.signature_help, opts)
       -- TODO: check if workspace is needed
       --      vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
       --      vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
