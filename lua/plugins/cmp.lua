@@ -1,13 +1,15 @@
+-- https://github.com/josean-dev/dev-environment-files/tree/main/.config/nvim
 return {
   "hrsh7th/nvim-cmp",
   version = "*", -- last release is way too old
   -- event = "InsertEnter",
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
-    "neovim/nvim-lspconfig",
-    "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
+    "neovim/nvim-lspconfig",
+    "hrsh7th/cmp-nvim-lsp",
+    
     "hrsh7th/cmp-cmdline",
     "hrsh7th/nvim-cmp",
     "hrsh7th/cmp-nvim-lua",
