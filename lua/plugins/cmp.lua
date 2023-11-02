@@ -45,12 +45,12 @@ return {
         end,
       },
       --  td
-      view = {
-        entries = {
-          name = "custom",
-          selection_order = "near_cursor",
-        },
-      },
+      -- view = {
+      --   entries = {
+      --     name = "custom",
+      --     selection_order = "near_cursor",
+      --   },
+      -- },
       --  td
 
       ---- Disable completion in Comments
