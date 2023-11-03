@@ -14,7 +14,7 @@ return {
     -- "neovim/nvim-lspconfig",
     -- "hrsh7th/cmp-nvim-lsp",
     -- "hrsh7th/cmp-cmdline",
-    -- "hrsh7th/cmp-nvim-lua",
+    "hrsh7th/cmp-nvim-lua", -- This source will complete neovim's Lua runtime API such vim.lsp.*
   },
   -- enabled = true,
 
@@ -109,24 +109,6 @@ return {
         -- Order of fields
         fields = { "abbr", "kind", "menu" },
 
-        -- formatting with custom icons in /config/icons.cmp.kind_iconsyy
-        -- and https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance#how-to-get-types-on-the-left-and-offset-the-menu
-        --  format = function(entry, vim_item)
-        --    -- Kind icons
-        --    local kind_icons = require("config.icons").cmp.kind_icons
-        --    vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-        --    -- Source
-        --    vim_item.menu = ({
-        --      nvim_lsp = "[LSP]",
-        --      luasnip = "[LuaSnip]",
-        --      nvim_lua = "[Lua]",
-        --      buffer = "[Buffer]",
-        --      path = "[Path]",
-        --    })[entry.source.name]
-        --    return vim_item
-        --  end,
-        -- END formatting with custom icons in /config/icons.cmp.kind_iconsyy
-
         -- simple with lspkind
         format = lspkind.cmp_format({
           -- default: symbol
@@ -134,6 +116,13 @@ return {
           mode = "symbol_text", -- show only symbol annotations
           maxwidth = 50,    -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
           ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+          menu = {
+            buffer = "[Buffer]",
+            nvim_lsp = "[LSP]",
+            luasnip = "[LuaSnip]",
+            nvim_lua = "[Lua]",
+            -- latex_symbols = "[Latex]",
+          },
         }),
         -- END simple with lspkind
       },
@@ -141,7 +130,7 @@ return {
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "luasnip" },
-        -- { name = "nvim_lua" },
+        { name = "nvim_lua" },
         { name = "buffer" },
         { name = "path" },
       }),
