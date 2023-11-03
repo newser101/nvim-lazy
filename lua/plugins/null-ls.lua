@@ -19,8 +19,10 @@ return {
       debug = false,
       --      log_level = "off",  -- if off :NULLINFO didnt work
       sources = {
+        null_ls.builtins.completion.luasnip,
         -- lua --
         formatting.stylua, -- lua
+        -- formatting.lua_format, -- lua
         diagnostics.luacheck.with({
           extra_args = { "--allow_defined" },
         }),
