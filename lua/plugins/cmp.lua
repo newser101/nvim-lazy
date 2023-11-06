@@ -7,7 +7,9 @@ return {
   dependencies = {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
-    "L3MON4D3/LuaSnip",
+    {"L3MON4D3/LuaSnip",
+    -- version="2.*",
+    build="make install_jsregexp"},
     "saadparwaiz1/cmp_luasnip",
     "rafamadriz/friendly-snippets",
     "onsails/lspkind.nvim", -- vs-code like pictograms
@@ -19,10 +21,9 @@ return {
   -- enabled = true,
 
   config = function()
+
     local cmp = require("cmp")
-
     local luasnip = require("luasnip")
-
     local lspkind = require("lspkind")
 
     require("luasnip.loaders.from_vscode").lazy_load()
@@ -121,6 +122,7 @@ return {
             nvim_lsp = "[LSP]",
             luasnip = "[LuaSnip]",
             nvim_lua = "[Lua]",
+            path="[Path]"
             -- latex_symbols = "[Latex]",
           },
         }),

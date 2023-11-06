@@ -16,7 +16,7 @@ return {
         "dirvish",
         "fugitive",
         "alpha",
-        "NvimTree",
+        -- "NvimTree",
         "packer",
         "neogitstatus",
         "Trouble",

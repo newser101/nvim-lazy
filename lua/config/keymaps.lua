@@ -113,8 +113,8 @@ keymap(
 keymap("n", "md", "<cmd>Glow<CR>", new_opts("markdown Glow"))
 
 -- illuminate
-keymap("n", "<a-n>", '<cmd>lua require"illuminate".next_reference{wrap=true}<cr>', opts)
-keymap("n", "<a-p>", '<cmd>lua require"illuminate".next_reference{reverse=true,wrap=true}<cr>', opts)
+keymap("n", "<a-n>", '<cmd>lua require("illuminate").goto_next_reference(wrap)<CR>', opts)
+keymap("n", "<a-p>", '<cmd>lua require("illuminate").goto_prev_reference(wrap)<cr>', opts)
 
 -- indentblanklines
 keymap("n", "<leader>it", ":IBLToggle<CR>", new_opts("toggle blank lines"))
