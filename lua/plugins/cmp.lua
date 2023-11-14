@@ -7,9 +7,11 @@ return {
   dependencies = {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
-    {"L3MON4D3/LuaSnip",
-    -- version="2.*",
-    build="make install_jsregexp"},
+    {
+      "L3MON4D3/LuaSnip",
+      -- version="2.*",
+      build = "make install_jsregexp",
+    },
     "saadparwaiz1/cmp_luasnip",
     "rafamadriz/friendly-snippets",
     "onsails/lspkind.nvim", -- vs-code like pictograms
@@ -21,12 +23,13 @@ return {
   -- enabled = true,
 
   config = function()
-
     local cmp = require("cmp")
     local luasnip = require("luasnip")
     local lspkind = require("lspkind")
 
-    require("luasnip.loaders.from_vscode").lazy_load()
+    -- require("luasnip.loaders.from_vscode").lazy_load()
+    -- load snippets from /snippets
+    require("luasnip.loaders.from_lua").load({ paths = "/home/cawl/.config/nvim/snippets/" })
 
     ---- function for SuperTAB ----
     local check_backspace = function()
@@ -122,7 +125,7 @@ return {
             nvim_lsp = "[LSP]",
             luasnip = "[LuaSnip]",
             nvim_lua = "[Lua]",
-            path="[Path]"
+            path = "[Path]",
             -- latex_symbols = "[Latex]",
           },
         }),
