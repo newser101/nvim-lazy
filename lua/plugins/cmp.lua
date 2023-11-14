@@ -27,7 +27,8 @@ return {
 
     -- require("luasnip.loaders.from_vscode").lazy_load()
     -- load snippets from path/of/your/nvim/config/my-cool-snippets
-    require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/lua/config/mysnipets.lua" } })
+    -- require("luasnip.loaders.from_vscode").lazy_load({ paths = { "~/.config/nvim/lua/snippets/" } })
+require("/home/cawl/.config/nvim/lua/snippets/")
     ---- function for SuperTAB ----
     local check_backspace = function()
       local col = vim.fn.col(".") - 1
