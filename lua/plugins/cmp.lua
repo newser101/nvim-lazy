@@ -15,8 +15,8 @@ return {
     "saadparwaiz1/cmp_luasnip",
     "rafamadriz/friendly-snippets",
     "onsails/lspkind.nvim", -- vs-code like pictograms
-    -- "neovim/nvim-lspconfig",
-    -- "hrsh7th/cmp-nvim-lsp",
+    "neovim/nvim-lspconfig",
+    "hrsh7th/cmp-nvim-lsp",
     -- "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-nvim-lua", -- This source will complete neovim's Lua runtime API such vim.lsp.*
   },
@@ -121,9 +121,9 @@ return {
           maxwidth = 50,    -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
           ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
           menu = {
-            buffer = "[Buffer]",
-            nvim_lsp = "[LSP]",
             luasnip = "[LuaSnip]",
+            nvim_lsp = "[LSP]",
+            buffer = "[Buffer]",
             nvim_lua = "[Lua]",
             path = "[Path]",
             -- latex_symbols = "[Latex]",
@@ -133,13 +133,24 @@ return {
       },
 
       sources = cmp.config.sources({
-        { name = "nvim_lsp" },
         { name = "luasnip" },
+        -- { name = "nvim_lsp" },
+        -- add so lsp dindt load snippets
+        {
+          name = "nvim_lsp",
+          entry_filter = function(entry, ctx)
+            -- return require("cmp").lsp.CompletionItemKind.Text ~= entry:get_kind()
+            if entry:get_kind() == 15 then
+              return false
+            end
+            return true
+          end,
+        },
+        -- END add
         { name = "nvim_lua" },
         { name = "buffer" },
         { name = "path" },
       }),
-
       window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
