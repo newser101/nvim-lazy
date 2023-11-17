@@ -2,8 +2,8 @@
 return {
   "hrsh7th/nvim-cmp",
   version = "*", -- last release is way too old
-  -- event = "InsertEnter",
-  event = { "InsertEnter", "CmdlineEnter" },
+  event = "InsertEnter",
+  -- event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
@@ -13,7 +13,11 @@ return {
       build = "make install_jsregexp",
     },
     "saadparwaiz1/cmp_luasnip",
-    "rafamadriz/friendly-snippets",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-nvim-lua",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-path",
+
     "onsails/lspkind.nvim", -- vs-code like pictograms
     "neovim/nvim-lspconfig",
     "hrsh7th/cmp-nvim-lsp",
@@ -49,12 +53,12 @@ return {
         end,
       },
       --  td
-      -- view = {
-      --   entries = {
-      --     name = "custom",
-      --     selection_order = "near_cursor",
-      --   },
-      -- },
+      view = {
+        entries = {
+          name = "custom",
+          selection_order = "near_cursor",
+        },
+      },
       --  td
 
       ---- Disable completion in Comments
