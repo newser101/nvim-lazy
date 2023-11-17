@@ -14,7 +14,7 @@ return {
     -- "neovim/nvim-lspconfig",
     -- "hrsh7th/cmp-nvim-lsp",
     -- "hrsh7th/cmp-cmdline",
-    -- "hrsh7th/cmp-nvim-lua",
+    "hrsh7th/cmp-nvim-lua",
   },
   -- enabled = true,
 
@@ -141,7 +141,7 @@ return {
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "luasnip" },
-        -- { name = "nvim_lua" },
+        { name = "nvim_lua" },
         { name = "buffer" },
         { name = "path" },
       }),
