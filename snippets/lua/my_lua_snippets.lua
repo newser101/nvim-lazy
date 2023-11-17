@@ -1,5 +1,4 @@
-return {
-  local ls = require("luasnip")
+local ls = require("luasnip")
 -- some shorthands...
 local snip = ls.snippet
 local node = ls.snippet_node
@@ -22,4 +21,3 @@ ls.add_snippets(nil, {
         }),
     },
 })
-}
